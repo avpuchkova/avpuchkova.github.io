@@ -7,7 +7,3 @@ module.exports = defineConfig({
     'vuetify',
   ],
 });
-
-module.exports = {
-  publicPath: '/avpuchkova.github.io/'
-}
