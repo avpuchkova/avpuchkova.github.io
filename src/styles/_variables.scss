@@ -1,0 +1,39 @@
+$palette-gray: hsl(192, 4%, 47%);
+$palette-0: #f3f3f3;
+$palette-1: #2852a1;
+$palette-2: #0072b8;
+$palette-3: #0085b5;
+$palette-4: #00949f;
+$palette-5: #00a07b;
+$palette-6: #34ab53;
+
+$font-size-base: 0.875rem;
+$font-family-sans-serif: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+  'Noto Sans', sans-serif;
+$font-family-base: $font-family-sans-serif;
+$font-weight-semibold: 500;
+
+$headings-font-family: 'Mulish';
+
+$card-lightblue: #d6edf8d4;
+$card-darkblue: #077db4;
+$font-size-card-large: 1.5rem;
+$font-size-card-mobile: $font-size-base;
+
+$spacer: 0.5rem;
+
+$body-bg: #fff;
+$body-color: #212529;
+
+$link-color: $palette-1;
+$link-hover-color: darken($link-color, 10%);
+
+$black: #000;
+$white: #fff;
+
+$btn-padding-x: 0.7rem;
+$btn-padding-y: 0.7rem;
+$btn-padding-x-lg: 0.7rem;;
+$btn-padding-y-lg: 0.7rem;;
+$btn-font-weight: 700;
+$btn-font-size: 0.875rem;
