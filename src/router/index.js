@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import MainPage from '@/views/MainPage.vue';
 
 Vue.use(VueRouter);
 
 const routes = [{
     path: '/',
     name: 'main',
-    component: MainPage,
+    //component: MainPage,
+    component: () => import( /* webpackChunkName: "about" */ '@/views/MainPage.vue'),
   },
   {
     path: '/about',
@@ -16,6 +16,31 @@ const routes = [{
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import( /* webpackChunkName: "about" */ '../views/About.vue'),
+  },
+  {
+    path: '/business-cards',
+    name: 'templateBusinessCards',
+    //component: TemplateBusinessCards,
+    component: () => import( /* webpackChunkName: "about" */
+      '../views/templates/TemplateBusinessCards.vue'),
+  },
+  {
+    path: '/account',
+    name: 'account',
+    component: () => import( /* webpackChunkName: "about" */
+      '../views/account/Account.vue'),
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    component: () => import( /* webpackChunkName: "about" */
+      '../views/account/Cart.vue'),
+  },
+  {
+    path: '/orders',
+    name: 'orders',
+    component: () => import( /* webpackChunkName: "about" */
+      '../views/account/Orders.vue'),
   },
 ];
 

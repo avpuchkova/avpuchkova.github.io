@@ -1,5 +1,26 @@
 <template>
   <Wrapper>
+    <v-row>
+      <v-col>
+        <v-breadcrumbs :items="breadcrumbs">
+          <template v-slot:divider>
+            <v-icon>mdi-chevron-right</v-icon>
+          </template>
+          <template v-slot:item="{ item }">
+            <v-breadcrumbs-item :disabled="item.disabled">
+                <router-link :to="{name: item.href}" :class="['breadcrumb', {'breadcrumb-active': !item.disabled}]">{{ item.text }}</router-link>         
+            </v-breadcrumbs-item>
+          </template>
+        </v-breadcrumbs>
+      </v-col>
+    </v-row>
+    <v-row justify="space-around">
+      <v-col class="text-center">
+        <div class="text-h3 mb-2">
+          Business Cards
+        </div>
+      </v-col>
+    </v-row>
     <v-row justify="space-between" align-content="center">
       <v-col class="pa-2 align-self-auto flex-grow-0 flex-shrink-0" cols="12" sm="3">
         <div>
@@ -7,7 +28,7 @@
             v-model="panel"
             multiple flat class="pa-2"
           >
-            <v-expansion-panel>
+            <!-- <v-expansion-panel>
               <v-expansion-panel-header>{{ currentLanguage === 'en' ? 'Type' : 'Тип' }}</v-expansion-panel-header>
               <v-expansion-panel-content>
                 <v-radio-group v-model="form.type">
@@ -19,7 +40,7 @@
                   ></v-radio>
                 </v-radio-group>
               </v-expansion-panel-content>
-            </v-expansion-panel>
+            </v-expansion-panel> -->
 
             <v-expansion-panel>
               <v-expansion-panel-header>{{ currentLanguage === 'en' ? 'Size' : 'Размер' }}</v-expansion-panel-header>
@@ -123,7 +144,7 @@
         <v-row>
           <v-col class="pa-2 align-self-auto flex-grow-1 flex-shrink-0">
             <div class="text-center">
-              <v-chip
+              <!-- <v-chip
                 v-if="form.type"
                 class="ma-2"
                 close
@@ -131,7 +152,7 @@
                 @click:close="form.type = null"
               >
                 {{form.type}}
-              </v-chip>
+              </v-chip> -->
 
               <v-chip
                 v-if="form.size"
@@ -227,7 +248,7 @@
   import { mapState, mapActions, mapGetters } from 'vuex';
   import Wrapper from '@/components/Wrapper.vue';
   import TitleButton from '@/views/create/TitleButton.vue'
-  import ButtonFlat from '@/components/ButtonFlat.vue'
+  import ButtonFlat from '@/components/buttons/ButtonFlat.vue'
 
   export default {
     name: 'Templates',
@@ -239,19 +260,18 @@
     data: () => ({
       panel: [],
       form: {
-        type: null,
         size: null,
         corners: null,
         orientation: null,
         styles: [],
         colours: [],
-        logo: false
+        logo: false,
       },
-      types: [
-        {titleEn: 'Business Card', titleRu: 'Визитка', value: 'business-card'},
-        {titleEn: 'Invitation Card', titleRu: 'Приглашение', value: 'invitation-card'},
-        {titleEn: 'Presentation Folder', titleRu: 'Буклет', value: 'presentation-folder'}
-      ],
+      // types: [
+      //   {titleEn: 'Business Card', titleRu: 'Визитка', value: 'business-card'},
+      //   {titleEn: 'Invitation Card', titleRu: 'Приглашение', value: 'invitation-card'},
+      //   {titleEn: 'Presentation Folder', titleRu: 'Буклет', value: 'presentation-folder'}
+      // ],
       sizes: [
         {titleEn: 'Standart', titleRu: 'Стандартный', value: 'standart'},
         {titleEn: 'Square (65 x 65 mm)', titleRu: 'Квадратный (65 x 65 мм)', value: 'square'},
@@ -295,6 +315,18 @@
         {titleEn: 'White', titleRu: 'Белый', value: 'white'},
         {titleEn: 'Gray', titleRu: 'Серый', value: 'gray'},
         {titleEn: 'Black', titleRu: 'Черный', value: 'black'},
+      ],
+      breadcrumbs: [
+        {
+          text: 'Home',
+          disabled: false,
+          href: 'main',
+        },
+        {
+          text: 'Business Cards',
+          disabled: true,
+          href: 'business-cards',
+        },
       ],
       pages: [5,10,20,50,100],
       showPage: 5,
@@ -346,7 +378,15 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '@/styles/_variables';
+.breadcrumb {
+  text-decoration: none;
+  color: $palette-gray;
+}
+.breadcrumb-active {
+    color: $black;
+}
 .v-tab {
   min-width: 300px !important;
   height: 120px !important;

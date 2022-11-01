@@ -1,8 +1,11 @@
 <template>
   <div>
-    <v-tabs v-model="tab" centered fixed-tabs>
-        <v-tab v-for="(item, i) in items" :key="i" class="tabs">{{item[currentLanguage]}}</v-tab>
-    </v-tabs>
+
+    <div class="top-tabs">
+      <v-tabs v-model="tab" centered hide-slider active-class="active-class-tab">
+          <v-tab v-for="(item, i) in items" :key="i" class="tabs">{{item[currentLanguage]}}</v-tab>
+      </v-tabs>
+    </div>
 
     <v-tabs-items v-model="tab">
       <v-tab-item
@@ -20,14 +23,12 @@
 <script>
   import { mapState } from 'vuex';
   import Create from '@/views/create/Create.vue';
-  import Templates from '@/views/templates/Templates.vue'
   import Order from '@/views/order/Order.vue';
 
   export default {
     name: 'MainPage',
     components: {
       Create,
-      Templates,
       Order
     },
 
@@ -35,7 +36,7 @@
       tab: null,
       items: [
         {'en': 'Create', 'ru': 'Создать', component: 'Create'},
-        {'en': 'Templates', 'ru': 'Библиотека', component: 'Templates'}, 
+       // {'en': 'Templates', 'ru': 'Библиотека', component: 'Templates'}, 
         {'en': 'Order', 'ru': 'Заказать', component: 'Order'}],
     }),
     computed: {
@@ -51,7 +52,18 @@
 
 <style lang="scss" scoped>
   @import '@/styles/_variables';
-  .tabs {
-    font-size: $font-size-card-large !important;
+  .top-tabs {
+    border-bottom: 1px solid $border-light;
+    padding: 15px 0;
+    .tabs {
+      font-size: $font-size-card-large !important;
+      color: $palette-gray;
+      text-transform: none;
+      padding: 0 45px;
+    }
+    & .active-class-tab {
+      color: $black;
+    }
   }
+
 </style>

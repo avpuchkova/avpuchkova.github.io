@@ -12,18 +12,23 @@ $font-family-sans-serif: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI'
   'Noto Sans', sans-serif;
 $font-family-base: $font-family-sans-serif;
 $font-weight-semibold: 500;
+$font-weight-bolt: 700;
 
 $headings-font-family: 'Mulish';
 
 $card-lightblue: #d6edf8d4;
 $card-darkblue: #077db4;
+$card-lightgray: #f8f8f8;
 $font-size-card-large: 1.5rem;
 $font-size-card-mobile: $font-size-base;
+
+$border-light: #e4e4e4;
 
 $spacer: 0.5rem;
 
 $body-bg: #fff;
 $body-color: #212529;
+$dark-gray: $body-color;
 
 $link-color: $palette-1;
 $link-hover-color: darken($link-color, 10%);

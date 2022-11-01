@@ -1,8 +1,10 @@
 <template>
   <v-app-bar
     app
-    color="primary"
-    dark
+    color="white"
+    outlined
+    elevate-on-scroll
+    class="app-bar"
   >
     <div class="d-flex align-center logo">
       <v-img
@@ -16,53 +18,27 @@
     Pet Project
     </div>
     <v-spacer></v-spacer>
-    <div class="text-center">
-      <v-menu offset-y>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            color="primary"
-            dark
-            v-bind="attrs"
-            v-on="on"
-          >
-            <v-avatar class="lang-menu-flag">
-              <img
-                class="d-block mr-2"
-                :src="currentLanguageIcon"
-                :alt="currentLanguage"
-              >
-            </v-avatar>
-            {{ currentLanguageText }}
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item
-            v-for="(lang, index) in languages"
-            :key="index"
-            @click="setLanguage(lang.value)">
-            <img :src="lang.iconSrc"
-              :alt="lang.value"
-              class="mr-2 d-block lang-menu-item-flag"
-            />
-            <v-list-item-title>{{ lang.text }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+    <div class="d-flex flex-row align-en">
+      <Auth />
+      <LanguageSelect />
+      <Cart />
     </div>
-
-    <v-btn text>
-      <span class="mr-2">Login</span>
-      <v-icon>mdi-login-variant</v-icon>
-    </v-btn>
   </v-app-bar>
 </template>
 
 <script>
   import { mapState, mapActions, mapGetters } from 'vuex';
+  import LanguageSelect from '@/components/LanguageSelect.vue';
+  import Cart from '@/components/Cart.vue';
+  import Auth from '@/components/Auth.vue';
 
   export default {
     name: 'TopMenu',
-
+    components: {
+      LanguageSelect,
+      Cart,
+      Auth
+    },
     data: () => ({
 
     }),
@@ -76,7 +52,6 @@
     methods: {
       ...mapActions(["setCurrentLanguage"]),
       setLanguage(lang) {
-
         this.setCurrentLanguage({ language: lang });
       },
     },
@@ -85,18 +60,11 @@
 
 <style lang="scss" scoped>
 @import '@/styles/_variables';
-  .lang-menu-flag {
-    border-radius: 0 !important;
-  }
-
-  .lang-menu-flag,
-  .lang-menu-item-flag {
-    width: 35px !important;
-    min-width: 35px !important;
-    height: 30px !important;
-  }
   .logo {
     font-size: 1.5rem;
+  }
+  .app-bar {
+    border-bottom: 1px solid $border-light !important;
   }
 
   @media (max-width: 600px) {

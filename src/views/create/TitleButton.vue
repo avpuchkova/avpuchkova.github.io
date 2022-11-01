@@ -49,7 +49,8 @@
 <style lang="scss" scoped>
 @import '@/styles/_variables';
   .active-class {
-    background-color: $card-lightblue;
+    background-color: $card-lightgray;
+    border: 1px solid $palette-gray;
   }
   .card {
     .title {
