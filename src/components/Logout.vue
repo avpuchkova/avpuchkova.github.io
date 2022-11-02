@@ -94,7 +94,6 @@
         //   this.$router.push("/")
         // });
         this.logout().then(() => {
-          console.log('logout')
           this.drawer = null
         });;
       },

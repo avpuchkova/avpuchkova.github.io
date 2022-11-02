@@ -2,7 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import language from '@/store/modules/language.js';
-import auth from '@/store/modules/auth.js'
+import auth from '@/store/modules/auth.js';
+import cart from '@/store/modules/cart.js';
 
 Vue.use(Vuex);
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     language,
-    auth
+    auth,
+    cart
   },
 });

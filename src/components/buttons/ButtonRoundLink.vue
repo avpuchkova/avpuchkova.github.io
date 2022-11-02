@@ -1,10 +1,14 @@
 <template>
   <router-link :to="{name: link}" class="link">
     <v-btn
-      outlined
+      :outlined="false"
       rounded
+      :dark="dark && !disabled"
+      :color="color"
       x-large
       class="link-btn"
+      :block="block"
+      depressed
     >
       {{ title }}
     </v-btn>
@@ -21,7 +25,23 @@ export default {
     },
     title: {
       type: String
-    }
+    },
+    block: {
+      type: Boolean,
+      default: false
+    },
+    dark: {
+      type: Boolean,
+      default: false
+    },
+    color: {
+      type: String,
+      default: 'white'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
   },
   methods: {
 

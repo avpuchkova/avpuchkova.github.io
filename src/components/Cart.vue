@@ -1,18 +1,19 @@
 <template>
-  <v-btn text class="top-menu-btn">
+  <v-btn text class="top-menu-btn" @click="clickCart">
     <v-badge
       color="blue"
-      :content="items"
+      :content="totalItems"
       bottom
       left
       overlap
-      v-if="items > 0"
+      v-if="totalItems > 0"
     >
       <v-icon>mdi-cart-variant</v-icon>
     </v-badge>
+    <v-icon v-else>mdi-cart-variant</v-icon>
     <div class="d-flex flex-column align-start">
       <span class="title">{{ currentLanguage === 'en' ? 'Cart' : 'Корзина' }}</span>
-      <span v-if="amount > 0" class="subtitle text-caption red--text">&euro; {{ amount }}</span>
+      <span v-if="totalPrice > 0" class="subtitle text-caption red--text">&euro; {{ totalPrice.toFixed(2) }}</span>
     </div>
   </v-btn>
 </template>
@@ -29,11 +30,10 @@
       }
     },
     data: () => ({
-      items: 5,
-      amount: 100.00
+
     }),
     computed: {
-      ...mapGetters(["currentLanguageText", "currentLanguageIcon"]),
+      ...mapGetters(["currentLanguageText", "currentLanguageIcon", "totalPrice", "totalItems"]),
       ...mapState({
         currentLanguage: (state) => state.language.currentLanguage,
         languages: (state) => state.language.languages
@@ -44,6 +44,9 @@
       setLanguage(lang) {
         this.setCurrentLanguage({ language: lang });
       },
+      clickCart() {
+        this.$router.push('/cart');
+      }
     },
   }
 </script>

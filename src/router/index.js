@@ -18,6 +18,13 @@ const routes = [{
     component: () => import( /* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
+    path: '/order',
+    name: 'order',
+    //component: TemplateBusinessCards,
+    component: () => import( /* webpackChunkName: "about" */
+      '../views/order/Order.vue'),
+  },
+  {
     path: '/business-cards',
     name: 'templateBusinessCards',
     //component: TemplateBusinessCards,
@@ -41,6 +48,12 @@ const routes = [{
     name: 'orders',
     component: () => import( /* webpackChunkName: "about" */
       '../views/account/Orders.vue'),
+  },
+  {
+    path: '/payment',
+    name: 'payment',
+    component: () => import( /* webpackChunkName: "about" */
+      '../views/account/Payment.vue'),
   },
 ];
 

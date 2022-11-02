@@ -6,7 +6,7 @@
     elevate-on-scroll
     class="app-bar"
   >
-    <div class="d-flex align-center logo">
+    <v-btn class="d-flex align-center logo" @click="goTo('/')" text plain>
       <v-img
         alt="Logo"
         class="shrink mr-2"
@@ -16,7 +16,7 @@
         width="40"
       />
     Pet Project
-    </div>
+    </v-btn>
     <v-spacer></v-spacer>
     <div class="d-flex flex-row align-en">
       <Auth />
@@ -54,6 +54,9 @@
       setLanguage(lang) {
         this.setCurrentLanguage({ language: lang });
       },
+      goTo(path){
+        this.$router.push(path)
+      }
     },
   };
 </script>
