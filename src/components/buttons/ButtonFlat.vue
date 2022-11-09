@@ -4,6 +4,7 @@
       :rounded="rounded"
       class="button-flat"
       @click="click"
+      :x-large="large"
     >
       <v-icon v-if="icon" class="icons">{{ icon }}</v-icon>
       <span class="mr-2">{{ title }}</span>
@@ -21,6 +22,10 @@
         type: String
       },
       rounded: {
+        type: Boolean,
+        default: false
+      },
+      large: {
         type: Boolean,
         default: false
       }

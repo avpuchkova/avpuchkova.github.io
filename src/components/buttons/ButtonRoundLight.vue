@@ -1,22 +1,22 @@
 <template>
-    <v-btn
-      :outlined="color !== 'black'"
-      rounded
-      :dark="dark && !disabled"
-      :color="color"
-      x-large
-      @click="click"
-      class="link-btn"
-      :disabled="disabled"
-      retain-focus-on-click
-    >
-      {{ title }}
-    </v-btn>
+  <v-btn
+    outlined
+    rounded
+    depressed
+    :dark="dark && !disabled"
+    :color="color"
+    x-large
+    @click="click"
+    class="link-btn"
+    :disabled="disabled"
+  >
+    {{ title }}
+  </v-btn>
 </template>
 
 <script>
 export default {
-  name: 'ButtonRoundLink',
+  name: 'ButtonRoundLight',
   props: {
     link: {
       type: String,
@@ -31,7 +31,7 @@ export default {
     },
     color: {
       type: String,
-      default: 'white'
+      default: 'black'
     },
     disabled: {
       type: Boolean,
@@ -48,10 +48,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/styles/_variables';
-.link {
-  text-decoration: none;
-}
-.link-btn {
-  text-transform: none;
-}
+  .link {
+    text-decoration: none;
+  }
+  .link-btn {
+    text-transform: none;
+    padding: 0 30px !important;
+  }
 </style>

@@ -1,7 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Router from 'vue-router'
 
 Vue.use(VueRouter);
+
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+};
+
+Vue.use(Router);
 
 const routes = [{
     path: '/',
@@ -19,7 +27,7 @@ const routes = [{
   },
   {
     path: '/order',
-    name: 'order',
+    name: 'Order',
     //component: TemplateBusinessCards,
     component: () => import( /* webpackChunkName: "about" */
       '../views/order/Order.vue'),
@@ -30,6 +38,12 @@ const routes = [{
     //component: TemplateBusinessCards,
     component: () => import( /* webpackChunkName: "about" */
       '../views/templates/TemplateBusinessCards.vue'),
+  },
+  {
+    path: '/business-card/:id',
+    name: 'templateBusinessCard',
+    component: () => import( /* webpackChunkName: "about" */
+      '../views/templates/TemplateBusinessCard.vue'),
   },
   {
     path: '/account',

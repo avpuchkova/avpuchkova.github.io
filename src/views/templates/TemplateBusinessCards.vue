@@ -2,16 +2,7 @@
   <Wrapper>
     <v-row>
       <v-col>
-        <v-breadcrumbs :items="breadcrumbs">
-          <template v-slot:divider>
-            <v-icon>mdi-chevron-right</v-icon>
-          </template>
-          <template v-slot:item="{ item }">
-            <v-breadcrumbs-item :disabled="item.disabled">
-                <router-link :to="{name: item.href}" :class="['breadcrumb', {'breadcrumb-active': !item.disabled}]">{{ item.text }}</router-link>         
-            </v-breadcrumbs-item>
-          </template>
-        </v-breadcrumbs>
+        <Breadcrumbs :breadcrumbs="breadcrumbs" />
       </v-col>
     </v-row>
     <v-row justify="space-around">
@@ -50,7 +41,8 @@
                     v-for="(size,i) in sizes"
                     :key="i"
                     :label="`${currentLanguage === 'en' ? size.titleEn : size.titleRu}`"
-                    :value="size.value"
+                    :value="size.id"
+                    
                   ></v-radio>
                 </v-radio-group>
               </v-expansion-panel-content>
@@ -64,7 +56,7 @@
                       v-for="(corner,i) in corners"
                       :key="i"
                       :label="`${currentLanguage === 'en' ? corner.titleEn : corner.titleRu}`"
-                      :value="corner.value"
+                      :value="corner.id"
                     ></v-radio>
                   </v-radio-group>
                 </v-expansion-panel-content>
@@ -75,10 +67,10 @@
                 <v-expansion-panel-content>
                   <v-radio-group v-model="form.orientation">
                     <v-radio
-                      v-for="(orient,i) in orientation"
+                      v-for="(orient,i) in orientations"
                       :key="i"
                       :label="`${currentLanguage === 'en' ? orient.titleEn : orient.titleRu}`"
-                      :value="orient.value"
+                      :value="orient.id"
                     ></v-radio>
                   </v-radio-group>
                 </v-expansion-panel-content>
@@ -92,7 +84,7 @@
                       hide-details
                       :key="style.value"
                       v-model="form.styles"
-                      :value="style.value"
+                      :value="style.id"
                       :label="`${currentLanguage === 'en' ? style.titleEn : style.titleRu}`"
                   >
                   </v-checkbox>
@@ -113,7 +105,7 @@
                           class="ma-2"
                           :color="colour.value === 'white'? 'black' : colour.value === 'cream' ? 'brown lighten-5' : colour.value"
                           hide-details
-                          :value="colour.value"
+                          :value="colour.id"
                           small
                           :outlined="colour.value === 'white'"
                           v-bind="attrs"
@@ -161,7 +153,7 @@
                 outlined
                 @click:close="form.size = null"
               >
-                {{form.size}}
+                {{getTag('size', form.size)}}
               </v-chip>
 
               <v-chip
@@ -171,7 +163,7 @@
                 outlined
                 @click:close="form.corners = null"
               >
-                {{form.corners}}
+                {{getTag('corners', form.corners)}}
               </v-chip>
 
               <v-chip
@@ -181,39 +173,52 @@
                 outlined
                 @click:close="form.orientation = null"
               >
-                {{form.orientation}}
+                {{getTag('orientation', form.orientation)}}
               </v-chip>
 
               <v-chip
                 v-for="(style,i) in form.styles"
-                :key="style"
+                :key="`style-${i}`"
                 class="ma-2"
                 close
                 outlined
                 @click:close="form.styles.splice(i, 1)"
               >
-                {{style}}
+                {{getTag('style', style)}}
               </v-chip>
 
               <v-chip
                 v-for="(colour,i) in form.colours"
-                :key="colour"
+                :key="`colour-${i}`"
                 class="ma-2"
                 close
                 outlined
-                :color="colour === 'white'? 'black' : colour === 'cream' ? 'brown lighten-4' : colour"
+                :color="colour === 10 ? 'black' : colour === 9 ? 'brown lighten-4' : getTag('colour', colour)"
                 @click:close="form.colours.splice(i, 1)"
               >
-                {{colour}}
+                {{getTag('colour', colour)}}
               </v-chip>
 
-              <button-flat
-                v-if="showClearAll"
-                :rounded="true"
-                @callback="clearForm"
+              <v-chip
+                v-if="form.logo"
+                class="ma-2"
+                close
+                outlined
+                @click:close="form.logo = false"
               >
-                Clear All
-              </button-flat>
+                {{getTag('logo', form.logo)}}
+              </v-chip>
+
+              <v-btn
+                v-if="showClearAll"
+                rounded
+                depressed
+                outlined
+                small
+                @click="clearForm"
+
+              >Clear All
+              </v-btn>
 
             </div>
           </v-col>
@@ -239,6 +244,21 @@
             </div>
           </v-col>
         </v-row>
+        <v-row>
+          <v-col v-if="sortedBusinessCards.length === 0">No items available. Please change filter parametres</v-col>
+          <v-col v-else v-for="(item, i) in sortedBusinessCards" :key="i">
+            <div>
+              <span>{{item.id}} ~ {{item.title}} ~ size: {{item.size}} ~ corners: {{item.corners}} ~ orientation: {{item.orientation}} ~ styles: {{item.styles}} ~ colours: {{item.colours}}</span>
+              <v-img
+                :src="item.src"
+                :lazy-src="item.src"
+                max-height="150"
+                max-width="250"
+                @click="clickImg(item.id)"
+              ></v-img>
+            </div>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </Wrapper>
@@ -247,19 +267,24 @@
 <script>
   import { mapState, mapActions, mapGetters } from 'vuex';
   import Wrapper from '@/components/Wrapper.vue';
-  import TitleButton from '@/views/create/TitleButton.vue'
-  import ButtonFlat from '@/components/buttons/ButtonFlat.vue'
+  import Breadcrumbs from '@/components/Breadcrumbs.vue';
+  import TitleButton from '@/views/create/TitleButton.vue';
+  import ButtonFlat from '@/components/buttons/ButtonFlat.vue';
+  import ButtonRound from '@/components/buttons/ButtonRound.vue';
 
   export default {
     name: 'Templates',
     components: {
       Wrapper,
+      Breadcrumbs,
       TitleButton,
-      ButtonFlat
+      ButtonFlat,
+      ButtonRound
     },
     data: () => ({
       panel: [],
       form: {
+        typeId: 1,
         size: null,
         corners: null,
         orientation: null,
@@ -267,55 +292,6 @@
         colours: [],
         logo: false,
       },
-      // types: [
-      //   {titleEn: 'Business Card', titleRu: 'Визитка', value: 'business-card'},
-      //   {titleEn: 'Invitation Card', titleRu: 'Приглашение', value: 'invitation-card'},
-      //   {titleEn: 'Presentation Folder', titleRu: 'Буклет', value: 'presentation-folder'}
-      // ],
-      sizes: [
-        {titleEn: 'Standart', titleRu: 'Стандартный', value: 'standart'},
-        {titleEn: 'Square (65 x 65 mm)', titleRu: 'Квадратный (65 x 65 мм)', value: 'square'},
-        {titleEn: 'Slim (85 x 40 mm)', titleRu: 'Стандартный (85 x 40 mm)', value: 'slim'}
-      ],
-      corners: [
-        {titleEn: 'Rounded', titleRu: 'Скругленные', value: 'rounded'},
-        {titleEn: 'Standart', titleRu: 'Стандартные', value: 'standart'}        
-      ],
-      orientation: [
-        {titleEn: 'Horizontal', titleRu: 'Горизонтальная', value: 'horizontal'},
-        {titleEn: 'Vertical', titleRu: 'Вертикальная', value: 'vertical'}         
-      ],
-      styles: [
-        {titleEn: 'Animals', titleRu: 'Животные', value: 'animals'},
-        {titleEn: 'Bold & Colourful', titleRu: 'Красочный', value: 'colourful'},
-        {titleEn: 'Business Specific', titleRu: 'Для бизнесса', value: 'business'},
-        {titleEn: 'Cultural', titleRu: 'Культура', value: 'cultural'},
-        {titleEn: 'Floral', titleRu: 'Цветочный', value: 'floral'},
-        {titleEn: 'Folk & rustic', titleRu: 'Рустик', value: 'folk'},
-        {titleEn: 'Modern & Simple', titleRu: 'Простой и современный', value: 'modern'},
-        {titleEn: 'Patriotic & Military', titleRu: 'Патриотический', value: 'military'},
-        {titleEn: 'Patterns & Textures', titleRu: 'Узоры и текстуры', value: 'textures'},
-        {titleEn: 'Religious', titleRu: 'Религия', value: 'religious'},
-        {titleEn: 'Retro & Vintage', titleRu: 'Ретро и винтаж', value: 'retro'},
-        {titleEn: 'Seasonal', titleRu: 'Времена года', value: 'seasonal'},
-        {titleEn: 'Sports', titleRu: 'Спорт', value: 'sports'},
-        {titleEn: 'Typographical', titleRu: 'География', value: 'typographical'},
-        {titleEn: 'Wedding Events', titleRu: 'Свадьба', value: 'wedding'},
-      ],
-      colours: [
-        {titleEn: 'Pink', titleRu: 'Розовый', value: 'pink'},
-        {titleEn: 'Red', titleRu: 'Красный', value: 'red'},
-        {titleEn: 'Orange', titleRu: 'Оранжевый', value: 'orange'},
-        {titleEn: 'Yellow', titleRu: 'Желтый', value: 'yellow'},
-        {titleEn: 'Green', titleRu: 'Зеленый', value: 'green'},
-        {titleEn: 'Blue', titleRu: 'Синий', value: 'blue'},
-        {titleEn: 'Purple', titleRu: 'Фиолетовый', value: 'purple'},
-        {titleEn: 'Brown', titleRu: 'Коричневый', value: 'brown'},
-        {titleEn: 'Cream', titleRu: 'Бежевый', value: 'cream'},
-        {titleEn: 'White', titleRu: 'Белый', value: 'white'},
-        {titleEn: 'Gray', titleRu: 'Серый', value: 'gray'},
-        {titleEn: 'Black', titleRu: 'Черный', value: 'black'},
-      ],
       breadcrumbs: [
         {
           text: 'Home',
@@ -325,13 +301,25 @@
         {
           text: 'Business Cards',
           disabled: true,
-          href: 'business-cards',
+          href: 'templateBusinessCards',
         },
       ],
       pages: [5,10,20,50,100],
       showPage: 5,
       sreenSize: window.innerWidth
     }),
+    watch: {
+      form: {
+        handler: function(newValue) {
+          this.sortItems(newValue);
+        },
+        deep: true
+      }
+    },
+    beforeRouteLeave (to, from, next) { 
+      this.clearForm()
+      next()
+    },
     created() {
       window.addEventListener("resize", this.myEventHandler);
     },
@@ -339,10 +327,20 @@
       window.removeEventListener("resize", this.myEventHandler);
     },
     computed: {
-      ...mapGetters(["currentLanguageText", "currentLanguageIcon"]),
+      ...mapGetters([
+        "currentLanguageText",
+        "currentLanguageIcon",
+        "sortedBusinessCards",
+      ]),
       ...mapState({
         currentLanguage: (state) => state.language.currentLanguage,
-        languages: (state) => state.language.languages
+        languages: (state) => state.language.languages,
+        types: (state) => state.base.types,
+        sizes: (state) => state.base.sizes,
+        corners: (state) => state.base.corners,
+        orientations: (state) => state.base.orientations,
+        styles: (state) => state.base.styles,
+        colours: (state) => state.base.colours,
       }),
       getCategories() {
         return this.currentLanguage === 'en' ? this.categoriesEn : this.categoriesRu
@@ -353,19 +351,20 @@
         return false
       },
       showClearAll() {
-        return Object.values(this.form)
-                .map(e => (!e || e === null || !e.length) ? 0 : 1)
-                .some(e => e > 0)
-      }
+        return Object.entries(this.form)
+          .map(([key, v]) => (key == 'typeId' || !v || v === null || v.length === 0) ? 0 : 1)
+          .some(e => e > 0)
+      },
+
     },
     methods: {
-      ...mapActions(["setCurrentLanguage"]),
+      ...mapActions(["setCurrentLanguage", "sortItems", "sortSize", "selectBusinessCard"]),
       myEventHandler(e) {
         this.sreenSize = window.innerWidth;
       },
       clearForm() {
         this.form = {
-          type: null,
+          typeId: 1,
           size: null,
           corners: null,
           orientation: null,
@@ -373,6 +372,31 @@
           colours: [],
           logo: false
         }
+      },
+      getTag(type, value){
+        switch (type) {
+          case 'size':
+            return this.sizes.find(item => item.id === value).value;
+          case 'corners':
+            return this.corners.find(item => item.id === value).value;
+          case 'orientation':
+            return this.orientations.find(item => item.id === value).value;
+          case 'style':
+            return this.styles.find(item => item.id === value).value;
+          case 'colour':
+            return this.colours.find(item => item.id === value).value;
+          case 'logo':
+            return 'Own logo/photo'
+          default:
+            return ''
+        }
+      },
+      clickImg(id) {
+        console.log('clickImg', id)
+       this.selectBusinessCard(id).then(() => {
+        this.$router.push({name: 'templateBusinessCard', params: { id: id}})
+        }
+       )
       }
     },
   };

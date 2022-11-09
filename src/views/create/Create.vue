@@ -28,11 +28,17 @@
             </p>
           </v-card-text>
           <v-card-actions>
-            <ButtonRoundLink
-              :title="`${currentLanguage === 'en' ? 'Get started' : 'Начать'}`" 
-              :link="'templateBusinessCards'"
+            <ButtonRoundLight
+              :title="currentLanguage === 'en' ? 'Download Example' : 'Скачать образец'"
             >
-            </ButtonRoundLink>
+            </ButtonRoundLight>
+            <ButtonRound
+              :color="'black'"
+              :dark="true"
+              :title="currentLanguage === 'en' ? 'Get started' : 'Начать'"
+              @callback="clickGetStart('/business-cards')"
+            >
+            </ButtonRound> 
           </v-card-actions>
         </v-card>
       </v-tab-item>
@@ -44,11 +50,11 @@
             </p>
           </v-card-text>
           <v-card-actions>
-            <ButtonRoundLink
+            <ButtonRoundLight
               :title="`${currentLanguage === 'en' ? 'Get started' : 'Начать'}`" 
               :link="'templateBusinessCards'"
             >
-            </ButtonRoundLink>
+            </ButtonRoundLight>
           </v-card-actions>
         </v-card>
       </v-tab-item>
@@ -60,11 +66,11 @@
             </p>
           </v-card-text>
           <v-card-actions>
-            <ButtonRoundLink 
+            <ButtonRoundLight
               :title="`${currentLanguage === 'en' ? 'Get started' : 'Начать'}`" 
               :link="'templateBusinessCards'"
             >
-            </ButtonRoundLink>
+            </ButtonRoundLight>
           </v-card-actions>
         </v-card>
       </v-tab-item>
@@ -78,13 +84,16 @@
   import Wrapper from '@/components/Wrapper.vue';
   import TitleButton from '@/views/create/TitleButton.vue';
   import ButtonRoundLink from '@/components/buttons/ButtonRoundLink.vue';
-
+  import ButtonRound from '@/components/buttons/ButtonRound.vue';
+  import ButtonRoundLight from '@/components/buttons/ButtonRoundLight.vue';
   export default {
     name: 'Create',
     components: {
       Wrapper,
       TitleButton,
-      ButtonRoundLink
+      ButtonRoundLink,
+      ButtonRound,
+      ButtonRoundLight
     },
     data: () => ({
       tab: null,
@@ -120,6 +129,9 @@
       },
       openCreateBusinessCard() {
         this.$router.push('/business-cards');
+      },
+      clickGetStart(link) {
+        this.$router.push(link);
       }
     },
   };
@@ -141,6 +153,7 @@
   }
   .link-btn {
     text-decoration: none;
+    text-transform: none;
   }
   @media (max-width: 600px) {
     .v-tab {

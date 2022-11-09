@@ -34,10 +34,10 @@
 
     data: () => ({
       tab: null,
-      items: [
+      items: [ 
+        {'en': 'Order', 'ru': 'Заказать', component: 'Order'},
         {'en': 'Create', 'ru': 'Создать', component: 'Create'},
-       // {'en': 'Templates', 'ru': 'Библиотека', component: 'Templates'}, 
-        {'en': 'Order', 'ru': 'Заказать', component: 'Order'}],
+      ]
     }),
     computed: {
       ...mapState({

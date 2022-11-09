@@ -7,8 +7,8 @@
 
 <script>
   import { mapState, mapActions, mapGetters } from 'vuex';
-  import Login from '@/components/Login.vue';
-  import Logout from '@/components/Logout.vue';
+  import Login from '@/components/auth/Login.vue';
+  import Logout from '@/components/auth/Logout.vue';
 
   export default {
     name: 'Auth',

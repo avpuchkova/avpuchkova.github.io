@@ -9,6 +9,7 @@
       class="link-btn"
       :block="block"
       depressed
+      retain-focus-on-click
     >
       {{ title }}
     </v-btn>

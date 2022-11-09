@@ -1,5 +1,8 @@
 import router from '@/router'
 
+const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+const CONFIRM = "CONFIRM";
+const RECOVER_PASSWORD = "RECOVER_PASSWORD";
 const LOGIN = "LOGIN";
 const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 const LOGOUT = "LOGOUT";
@@ -11,7 +14,6 @@ const SAVE_PASSWORD_SUCCESS = "SAVE_PASSWORD_SUCCESS";
 
 const state = {
   isLoggedIn: !!localStorage.getItem('token'),
-  userEmail: localStorage.getItem('email'),
   firstName: localStorage.getItem('firstName'),
   lastName: localStorage.getItem('lastName'),
   email: localStorage.getItem('email'),
@@ -19,25 +21,39 @@ const state = {
   password: null,
   pending: false,
   saving: false,
+  loading: false
 }
 
 const getters = {
   isLoggedIn: state => state.isLoggedIn,
-  userEmail: state => state.userEmail,
   userFirstName: state => state.firstName,
   userLastName: state => state.lastName,
   userEmail: state => state.email,
   userPhone: state => state.phone,
-  userPassword: state => state.password
+  userPassword: state => state.password,
+  pending: state => state.pending,
+  loading: state => state.loading
 }
 
 const mutations = {
+  [REGISTER_SUCCESS](state, playard) {
+    state.email = playard.email;
+    state.pending = false;
+    state.loading = true;
+  },
+  [CONFIRM](state) {
+    state.loading = false;
+  },
+  [RECOVER_PASSWORD](state, playard) {
+    state.pending = false;
+    state.loading = true;
+  },
   [LOGIN](state) {
     state.pending = true;
   },
   [LOGIN_SUCCESS](state, playard) {
+    state.email = playard.email;
     state.isLoggedIn = true;
-    state.userEmail = playard.email;
     state.pending = false;
   },
   [LOGOUT](state) {
@@ -63,10 +79,42 @@ const mutations = {
 }
 
 const actions = {
+  register({
+    commit
+  }, creds) {
+    commit(LOGIN);
+    console.log('register: ', creds)
+    return new Promise(resolve => {
+      setTimeout(() => {
+        localStorage.setItem("email", creds.email);
+        localStorage.setItem("password", creds.password);
+        commit(REGISTER_SUCCESS, creds);
+        resolve();
+      }, 2000);
+    });
+  },
+  confirm({
+    commit
+  }) {
+    commit(CONFIRM);
+  },
+  recoverPassword({
+    commit
+  }, creds) {
+    commit(LOGIN);
+    console.log('recover: ', creds.email)
+    return new Promise(resolve => {
+      setTimeout(() => {
+        commit(RECOVER_PASSWORD, creds.email);
+        resolve();
+      }, 1000);
+    });
+  },
   login({
     commit
   }, creds) {
     commit(LOGIN); // show spinner
+    console.log('login: ', creds)
     return new Promise(resolve => {
       setTimeout(() => {
         localStorage.setItem("token", "JWT");

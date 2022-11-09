@@ -5,8 +5,8 @@
     </div>
     <div class="px-5 settings-box">
       <div v-if="!totalItems" class="empty-cart">
-        <div v-if="currentLanguage === 'en'">Your cart is empty. You can see <ButtonLink :title="'Order History'" />.</div>
-        <div v-else>Ваша корзина пуста. Вы можете посмотреть свою <ButtonLink :title="'Историю Заказов'" />.</div>
+        <div v-if="currentLanguage === 'en'">Your cart is empty. You can see <ButtonLink :title="'Order History'" @callback="goTo('/orders')"/>.</div>
+        <div v-else>Ваша корзина пуста. Вы можете посмотреть свою <ButtonLink :title="'Историю Заказов'" @callback="goTo('/orders')"/>.</div>
         <div class="text-center my-5">
           <ButtonRoundLink
             :title="currentLanguage === 'en' ? 'Continue shopping' : 'Продолжить покупки'"
@@ -104,11 +104,7 @@
       ButtonRoundLink
     },
     data: () => ({
-      // items: [
-      //   {id: 1, title: 'Business card 1', img: '', price: 25.00},
-      //   {id: 2, title: 'Business card 2', img: '', price: 25.00},
-      //   {id: 3, title: 'Presentation Folder', img: '', price: 50.00}
-      // ]
+
     }),
     computed: {
       ...mapGetters(["isLoggedIn", "updatedItems", "totalPrice", "totalItems"]),
@@ -122,6 +118,9 @@
         this.deleteItem(id).then(() => {         
         });;
       },
+      goTo(link) {
+        this.$router.push(link);
+      }
     },
   }
 </script>

@@ -30,7 +30,7 @@
   import { mapState, mapActions, mapGetters } from 'vuex';
   import LanguageSelect from '@/components/LanguageSelect.vue';
   import Cart from '@/components/Cart.vue';
-  import Auth from '@/components/Auth.vue';
+  import Auth from '@/components/auth/Auth.vue';
 
   export default {
     name: 'TopMenu',
