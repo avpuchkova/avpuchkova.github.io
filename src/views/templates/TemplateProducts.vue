@@ -19,39 +19,57 @@
             v-model="panel"
             multiple flat class="pa-2"
           >
-          <template v-for="(option,i) in currentProductOptions">
+            <template v-for="(option,i) in currentProductOptions">
 
-            <v-expansion-panel :key="i" v-if="option.type === 'radiobutton'">
-              <v-expansion-panel-header>{{ currentLanguage === 'en' ? option.titleEn : option.titleRu }}</v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <v-radio-group :key="i" v-model="form2[option.name]" v-if="option.type === 'radiobutton'">
-                  <v-radio
-                    v-for="(row,inx) in options(option.name)"
-                    :key="`${row.name}-${inx}`"
-                    :label="`${currentLanguage === 'en' ? row.titleEn : row.titleRu}`"
-                    :value="row.id"
-                    @click="sortItems"      
-                  ></v-radio>
-                  <v-radio
-                    :key="`${option.name}-0`"
-                    :label="`${currentLanguage === 'en' ? 'I do not know' : 'Не знаю'}`"
-                    :value="null"
-                    @click="sortItems"
-                  ></v-radio>
-                </v-radio-group>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-           
-              <v-expansion-panel :key="i" v-if="option.type === 'checkboxes'">
+              <v-expansion-panel :key="i" v-if="option.type === 'radiobutton'">
+                <v-expansion-panel-header>{{ currentLanguage === 'en' ? option.titleEn : option.titleRu }}</v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <v-radio-group :key="i" v-model="form2[option.name]" v-if="option.type === 'radiobutton'">
+                    <v-radio
+                      v-for="(row,inx) in options(option.name)"
+                      :key="`${row.name}-${inx}`"
+                      :label="`${currentLanguage === 'en' ? row.titleEn : row.titleRu}`"
+                      :value="row.id"
+                      @click="sortItems"      
+                    ></v-radio>
+                    <v-radio
+                      :key="`${option.name}-0`"
+                      :label="`${currentLanguage === 'en' ? 'I do not know' : 'Не знаю'}`"
+                      :value="null"
+                      @click="sortItems"
+                    ></v-radio>
+                  </v-radio-group>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            
+              <v-expansion-panel :key="i" v-if="option.type === 'checkboxes' && option.name !== 'colour'">
                 <v-expansion-panel-header>{{ currentLanguage === 'en' ? option.titleEn : option.titleRu }}</v-expansion-panel-header>
                 <v-expansion-panel-content>
                   <v-checkbox      
                       v-for="(row,i) in options(option.name)"
+                      v-model="form2[option.name]"
                       hide-details
                       :key="`${row.id}-${i}`"             
                       :value="row.id"
-                      :label="`${currentLanguage === 'en' ? row.titleEn : row.titleRu}`"
-                      @click="clickOption(option.name, row.id)"
+                      :label="`${currentLanguage === 'en' ? row.titleEn : row.titleRu}`"                   
+                      @click="sortItems"
+                  >
+                  </v-checkbox>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+
+              <v-expansion-panel :key="i" v-if="option.type === 'checkboxes' && option.name === 'colour'">
+                <v-expansion-panel-header>{{ currentLanguage === 'en' ? option.titleEn : option.titleRu }}</v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <v-checkbox      
+                      v-for="(row,i) in options(option.name)"
+                      v-model="form2[option.name]"
+                      :color="row.value === 'white' ? 'gray' : row.value"
+                      hide-details
+                      :key="`${row.id}-${i}`"             
+                      :value="row.id"
+                      :label="`${currentLanguage === 'en' ? row.titleEn : row.titleRu}`"                   
+                      @click="sortItems"
                   >
                   </v-checkbox>
                 </v-expansion-panel-content>
@@ -64,119 +82,12 @@
             v-if="option.type === 'checkbox'"
               v-model="form2[option.name]"
               :value="1"
-              :label="`${currentLanguage === 'en' ? option.titleEn : option.titleRu}`"
-              
+              :label="`${currentLanguage === 'en' ? option.titleEn : option.titleRu}`"    
               @click="sortItems"
             ></v-checkbox>
           </div>
-
-<!-- 
-          <v-expansion-panels
-            v-model="panel"
-            multiple flat class="pa-2"
-          >
-            <v-expansion-panel>
-              <v-expansion-panel-header>{{ currentLanguage === 'en' ? 'Size' : 'Размер' }}</v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <v-radio-group v-model="form.size">
-                  <v-radio
-                    v-for="(size,i) in sizes"
-                    :key="i"
-                    :label="`${currentLanguage === 'en' ? size.titleEn : size.titleRu}`"
-                    :value="size.id"
-                    
-                  ></v-radio>
-                </v-radio-group>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-
-              <v-expansion-panel>
-                <v-expansion-panel-header>{{ currentLanguage === 'en' ? 'Corners' : 'Размер' }}</v-expansion-panel-header>
-                <v-expansion-panel-content>
-                  <v-radio-group v-model="form.corners">
-                    <v-radio
-                      v-for="(corner,i) in corners"
-                      :key="i"
-                      :label="`${currentLanguage === 'en' ? corner.titleEn : corner.titleRu}`"
-                      :value="corner.id"
-                    ></v-radio>
-                  </v-radio-group>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-
-              <v-expansion-panel>
-                <v-expansion-panel-header>{{ currentLanguage === 'en' ? 'Orientation' : 'Ориентация' }}</v-expansion-panel-header>
-                <v-expansion-panel-content>
-                  <v-radio-group v-model="form.orientation">
-                    <v-radio
-                      v-for="(orient,i) in orientations"
-                      :key="i"
-                      :label="`${currentLanguage === 'en' ? orient.titleEn : orient.titleRu}`"
-                      :value="orient.id"
-                    ></v-radio>
-                  </v-radio-group>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-
-              <v-expansion-panel>
-                <v-expansion-panel-header>{{ currentLanguage === 'en' ? 'Styles & Themes' : 'Стили и темы' }}</v-expansion-panel-header>
-                <v-expansion-panel-content>
-                    <v-checkbox
-                    v-for="(style) in styles"
-                      hide-details
-                      :key="style.value"
-                      v-model="form.styles"
-                      :value="style.id"
-                      :label="`${currentLanguage === 'en' ? style.titleEn : style.titleRu}`"
-                  >
-                  </v-checkbox>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-
-              <v-expansion-panel>
-                <v-expansion-panel-header>{{ currentLanguage === 'en' ? 'Colour' : 'Цвета' }}</v-expansion-panel-header>
-                <v-expansion-panel-content>
-                  <v-chip-group multiple column v-model="form.colours">
-                    <v-tooltip
-                      right
-                      v-for="(colour,i) in colours"
-                      :key="i"
-                    >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-chip
-                          class="ma-2"
-                          :color="colour.value === 'white'? 'black' : colour.value === 'cream' ? 'brown lighten-5' : colour.value"
-                          hide-details
-                          :value="colour.id"
-                          small
-                          :outlined="colour.value === 'white'"
-                          v-bind="attrs"
-                          v-on="on"
-                        >
-                        </v-chip>
-                      </template>
-                      <span>{{currentLanguage === 'en' ? colour.titleEn : colour.titleRu}}</span>
-                    </v-tooltip>
-                  </v-chip-group>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
-            <div>
-               <v-checkbox
-                  v-model="form.logo"
-                  :value="1"
-                  :label="`${currentLanguage === 'en' ? 'Has Logo/Photo Area' : 'У меня есть фото / логотип'}`"
-                ></v-checkbox>
-              </div>
-              <div>
-                <v-checkbox
-                  v-model="form.premium"
-                  :value="1"
-                  :label="`${currentLanguage === 'en' ? 'Premium' : 'Премиум'}`"
-                ></v-checkbox>
-            </div> -->
-          </div>
-        </v-col>
+        </div>
+      </v-col>
       <v-col class="pa-2 align-self-auto flex-grow-1 flex-shrink-0">
         <v-row>
           <v-col class="pa-2 align-self-auto flex-grow-1 flex-shrink-0">
@@ -186,11 +97,9 @@
                   v-if="!Array.isArray(form2[option.name]) && form2[option.name]"
                   class="ma-2"
                   close
-                  outlined
-                  
+                  outlined             
                   @click:close="clickClose(option.name)"
                 >
-                <!-- @click:close="form2[option.name] = null" -->
                   {{getTag(option.name, form2[option.name])}}
                 </v-chip>
                 <div v-if="Array.isArray(form2[option.name]) && form2[option.name].length">
@@ -208,7 +117,7 @@
               </div>
 
               <v-btn
-                v-if="showClearAll"
+                v-if="test"
                 rounded
                 depressed
                 outlined
@@ -323,7 +232,8 @@
       pageSize: pageSize,
       sreenSize: window.innerWidth,
       start: 0,
-      end: pageSize
+      end: pageSize,
+      test: false
     }},
     watch: {
       form: {
@@ -451,8 +361,6 @@
         let start = this.start
         let end = start + this.pageSize
 
-       //return this.sortedBusinessCards.slice(start, end)
-       console.log('itemsPerPage ---- this.sortedProducts', this.sortedProducts)
        return this.sortedProducts.slice(start, end)
        
       },
@@ -474,27 +382,15 @@
         let values = Object.values(this.form2[option])
         return values.includes(value)
       },
-      clickOption(option, value) {
-        let inx = this.form2[option].indexOf(value)
-        if (inx < 0) {
-          this.form2[option].push(value)
-        } else {
-          this.form2[option].splice(inx, 1)
-        }
-       
-        this.sortProducts({form: this.form2, id: this.currentProduct.id})
-      },
       clickClose(option, value) {
         
         if (!value) {
           this.form2[option] = null
         } else {
-          console.log('!!!!!!option:', option, 'value', value)
           let inx = this.form2[option].indexOf(value)
-          console.log('!!!!!inx:', inx)
           this.form2[option].splice(inx, 1)
-          console.log('!!!!!this.form2:', this.form2)
         }
+        console.log('this.form2', this.form2)
         this.sortItems()
       },
       myEventHandler(e) {
@@ -516,23 +412,27 @@
         this.showAllItems(this.currentProduct.id);
       },
       getTag(type, value){
-        return this[type].find(item => item.id === value).value;
+        return typeof value === 'number' ?
+        this[type].find(item => item.id === value).value
+        : value
       },
       clickImg(id) {
         this.openProduct(id).then(() => {
           this.$router.push({name: 'templateProduct', params: { id: id}})
         })
-
-      //  this.selectBusinessCard(id).then(() => {
-      //   this.$router.push({name: 'templateProduct', params: { id: id}})
-      //   }
-      //  )
       },
       showItemsPerPage({start, end}) {
         this.start = start
         this.end = end
       },
       sortItems() {
+        
+
+        this.test = Object.entries(this.form2)
+        .map(([key, v]) => (!v || v === null || v.length === 0) ? 0 : 1)
+        .some(e => e > 0)
+        console.log('sortItems  form2', this.form2)
+
         this.sortProducts({form: this.form2, id: this.currentProduct.id})
       }
     },

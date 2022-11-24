@@ -60,11 +60,10 @@ const getters = {
 
 const mutations = {
   showAllItems: (state, typeId) => {
-    let type = findItemType(typeId);
+    // let type = findItemType(typeId);
 
-    state[`sorted${type}`] = state[type]
+    //state[`sorted${type}`] = state[type]
     state.sortedProducts = items.filter(item => item.typeId === typeId)
-    console.log('mutations', 'showAllItems', state.sortedProducts)
 
     state.currentTypeId = typeId
     state.size = size.filter(item => item.typeId === typeId)
@@ -73,15 +72,13 @@ const mutations = {
     form,
     id
   }) => {
-    console.log('sortItems MUTATION', 'id: ', id, 'form>', form)
     if (!form) {
       //state.sortedbusinessCards = state.businessCards
       state.sortedProducts = state.productsCreate
-      console.log('!form', 'sortedProducts', state.sortedProducts)
     } else {
 
-      let type = findItemType(id)
-      console.log('>>>>>> type', type, 'id', id)
+      //let type = findItemType(id)
+
       //let cards = state[type]
 
       // state[`sorted${type}`] = cards.filter((card, i) => {
@@ -92,21 +89,19 @@ const mutations = {
       //       card[k] === v || v === null || !v
       //   })
       // })
-
+      console.log('mutations >>> form', form)
+      console.log('mutations >>> Object.entries(form)', Object.entries(form))
       let cards = state.items.filter(item => item.typeId === id)
-      console.log('>>>>>> cards', cards)
+
 
       state.sortedProducts = cards.filter((card, i) => {
         return Object.entries(form).every(([k, v]) => {
 
           return Array.isArray(v) ?
-            v.every(e => card[k].includes(e)) :
+            v.every(e => card[k].includes(e)) || v.length === 0 :
             card[k] === v || v === null || !v
         })
       })
-
-      console.log('>>>>>> state.sortedProducts', state.sortedProducts)
-
     }
   },
 
@@ -115,8 +110,6 @@ const mutations = {
   },
 
   openProduct: (state, id) => {
-    console.log('MUTATION openProduct', id)
-    console.log('openProduct', state.items.find(card => card.id == id))
     //let products = products.filter(p => p.typeId === typeId && p.availableCreate)
     state.openedProduct = state.items.find(card => card.id == id)
   },
@@ -130,7 +123,7 @@ const actions = {
     form,
     id
   }) {
-    console.log('ACTION sortItems', form, id)
+
     return context.commit('sortItems', {
       form,
       id

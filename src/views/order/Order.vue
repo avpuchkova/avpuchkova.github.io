@@ -134,7 +134,6 @@
         this.sreenSize = window.innerWidth;
       },
       clickProduct(product) {
-        console.log('product>>>>>>>', product)
         this.selectProduct(product.product).then(() => {
           this.$router.push({name: 'OrderProduct', params: { name: product.product}})
           }

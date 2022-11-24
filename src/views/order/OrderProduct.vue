@@ -168,11 +168,10 @@
     },
     mounted() {
       this.form = {}
-      console.log('currentProductOptions: ', this.currentProductOptions)
+
       this.currentProductOptions.map(option => {
         this.form[option.name] = option.type === 'checkboxes' ? [] : null
       })
-      console.log('this.form: ', this.form)
     },
     computed: {
       ...mapGetters([
@@ -198,11 +197,11 @@
             disabled: false,
             href: 'main',
           },
-          {
-            text: 'Order',
-            disabled: false,
-            href: 'Order',
-          },
+          // {
+          //   text: 'Order',
+          //   disabled: false,
+          //   href: 'Order',
+          // },
           {
             text: this.currentProduct.titleEn,
             disabled: true,
@@ -216,11 +215,11 @@
             disabled: false,
             href: 'main',
           },
-          {
-            text: 'Заказать',
-            disabled: false,
-            href: 'Order',
-          },
+          // {
+          //   text: 'Заказать',
+          //   disabled: false,
+          //   href: 'Order',
+          // },
           {
             text: this.currentProduct.titleRu,
             disabled: true,
@@ -258,7 +257,7 @@
       },
       orderProduct(product) {
         console.log('form: ', this.form)
-        console.log('Order: ', product)
+        console.log('Order product: ', product)
       }
     }
   }
