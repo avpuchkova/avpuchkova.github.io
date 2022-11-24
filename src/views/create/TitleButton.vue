@@ -1,24 +1,24 @@
 <template>
   <v-hover v-slot="{ hover }">
     <v-card
-      max-width="100%"
-      min-width="100%"
-      height="90%"
-      class="d-flex justify-start align-center px-2 px-sm-5 mx-auto card"
+     
+      height="200"
+      width="200"
+      class="d-flex flex-column justify-start align-center mb-5 pa-2 px-sm-5 mx-auto card"
       :class="{ 'active-class': isActive, 'on-hover': hover }"
       :elevation="hover ? 2 : 0"
       flat
       outlined
       >
-        <!-- <v-img 
+        <v-img 
           :src="iconSrc"
           :alt="title"
-          max-height="65"
-          max-width="90"
-        ></v-img> -->
-        <v-icon class="mr-5" x-large :color="color">
+          max-height="160"
+                    max-width="160"
+        ></v-img>
+        <!-- <v-icon class="mr-5" x-large :color="color">
           {{icon}}
-        </v-icon>
+        </v-icon> -->
         <div class="title">{{title}}</div>
 
     </v-card>
@@ -54,8 +54,9 @@
   }
   .card {
     .title {
-      font-size: $font-size-card-large !important;
-      text-align: start;
+      font-size: $font-size-base !important;
+      text-align: center;
+      text-transform: none;
     }
   }
 

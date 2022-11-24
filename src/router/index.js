@@ -33,17 +33,32 @@ const routes = [{
       '../views/order/Order.vue'),
   },
   {
-    path: '/business-cards',
-    name: 'templateBusinessCards',
+    path: '/order-product/:name',
+    name: 'OrderProduct',
     //component: TemplateBusinessCards,
     component: () => import( /* webpackChunkName: "about" */
-      '../views/templates/TemplateBusinessCards.vue'),
+      '../views/order/OrderProduct.vue'),
+    props: true
+  },
+  // {
+  //   path: '/business-cards',
+  //   name: 'templateBusinessCards',
+  //   //component: TemplateBusinessCards,
+  //   component: () => import( /* webpackChunkName: "about" */
+  //     '../views/templates/TemplateBusinessCards.vue'),
+  // },
+  {
+    path: '/create-product/:name',
+    name: 'CreateProduct',
+    //component: TemplateBusinessCards,
+    component: () => import( /* webpackChunkName: "about" */
+      '../views/templates/TemplateProducts.vue'),
   },
   {
-    path: '/business-card/:id',
-    name: 'templateBusinessCard',
+    path: '/create-product/:name/:id',
+    name: 'templateProduct',
     component: () => import( /* webpackChunkName: "about" */
-      '../views/templates/TemplateBusinessCard.vue'),
+      '../views/templates/TemplateProduct.vue'),
   },
   {
     path: '/account',

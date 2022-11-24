@@ -1,0 +1,266 @@
+const products = [{
+    id: 1,
+    productTypeId: 1,
+    price: 50.00,
+    product: 'business-cards',
+    titleEn: 'Business Cards',
+    titleRu: 'Визитная карточка',
+    icon: 'mdi-card-account-details-outline',
+    color: 'green darken-2',
+    iconSrc: require('@/assets/order/Business-card.jpg'),
+    briefRu: `Малая некнижная форма печати, традиционный носитель контактной информации о человеке или организации`,
+    briefEn: `Small non-book form of printing, a traditional carrier of contact information about a person or organization`,
+    textEn: `Business cards are the ultimate way to give a great first impression. Our 
+            paper business cards are available in both classic landscape orientation and, 
+            for something a bit different, portrait format. Stand out by choosing a 
+            different size, with four options to choose from`,
+    textRu: `Малая некнижная форма печати, традиционный носитель контактной информации о человеке 
+              или организации`,
+    options: [1, 3, 4, 5, 6, 7, 8],
+    availableOrder: true,
+    availableCreate: true
+  },
+  {
+    id: 2,
+    productTypeId: 2,
+    price: 77.77,
+    product: 'invitation-cards',
+    titleEn: 'Invitation Cards',
+    titleRu: 'Приглашения',
+    icon: 'mdi-card-account-details-star-outline',
+    color: 'purple darken-2',
+    iconSrc: require('@/assets/create/booklet.jpg'),
+    briefRu: 'Invitation cards',
+    briefEn: 'Приглашения text',
+    textEn: `Invitation cards are an important tool for spreading the word about your 
+    business – customise yours to advertise an event, product or launch. There are three 
+    different types to choose from – standard, special finish or postcard – so you can 
+    send your customers a product that stands out from the crowd`,
+    textRu: `Приглашения text`,
+    options: [1, 2, 3, 4, 5, 6, 7, 8],
+    availableOrder: false,
+    availableCreate: true
+  },
+  {
+    id: 3,
+    productTypeId: 3,
+    price: 150.00,
+    product: 'presentation-folders',
+    titleEn: 'Presentation Folders',
+    titleRu: 'Буклеты',
+    icon: 'mdi-id-card',
+    color: 'orange darken-2',
+    iconSrc: require('@/assets/order/leaflet.jpg'),
+    briefRu: `В форме лифлета издаются краткие путеводители, рекламные проспекты, программы публичных мероприятий и т. п.`,
+    briefEn: `В форме лифлета издаются краткие путеводители, рекламные проспекты, программы публичных мероприятий и т. п.`,
+    textEn: 'Presentation Folders text',
+    textRu: `Лист, как правило, с двумя или тремя фальцами, сложенный всевозможными способами,
+    например: пополам, гармошкой, дельтообразно или любым другим способом, подчёркивающим 
+    индивидуальность рекламного продукта. В форме лифлета издаются краткие путеводители, 
+    рекламные проспекты, программы публичных мероприятий и т. п.`,
+    options: [1, 2, 3, 4, 5, 6, 7, 8],
+    availableOrder: true,
+    availableCreate: true
+  },
+  {
+    id: 4,
+    productTypeId: 4,
+    price: 250.00,
+    product: 'badges',
+    titleEn: 'Badge',
+    titleRu: 'Бейдж',
+    icon: 'mdi-id-card',
+    color: 'orange darken-2',
+    iconSrc: require('@/assets/order/Badge.jpg'),
+    briefRu: `Элемент униформы, амуниции, в виде нагрудного знака, наклейки, карточки`,
+    briefEn: `Элемент униформы, амуниции, в виде нагрудного знака, наклейки, карточки`,
+    textEn: 'Presentation Folders text',
+    textRu: `Элемент униформы, амуниции, в виде нагрудного знака, наклейки, карточки, предназначенный для предоставления информации о его носителе`,
+    options: [1, 3, 4, 5, 6, 7],
+    availableOrder: true,
+    availableCreate: false
+  },
+  {
+    id: 5,
+    productTypeId: 5,
+    price: 350.00,
+    product: 'doorhangers',
+    titleEn: 'Doorhanger',
+    titleRu: 'Дорхенгеры',
+    icon: 'mdi-id-card',
+    color: 'orange darken-2',
+    iconSrc: require('@/assets/order/Doorhanger.jpg'),
+    briefRu: `Картонный крючок с рекламной информацией, которая вешается на ручку двери`,
+    briefEn: `Картонный крючок с рекламной информацией, которая вешается на ручку двери`,
+    textEn: 'Doorhandler text',
+    textRu: `Картонный крючок с рекламной информацией, которая вешается на ручку двери`,
+    options: [1, 3, 4, 5, 6, 7],
+    availableOrder: true,
+    availableCreate: false
+  },
+  {
+    id: 6,
+    productTypeId: 6,
+    price: 40.00,
+    product: 'brochures',
+    titleEn: 'Brochure',
+    titleRu: 'Брошюры',
+    icon: 'mdi-id-card',
+    color: 'orange darken-2',
+    iconSrc: require('@/assets/order/brochure.jpg'),
+    briefRu: `Непериодическое печатное издание объемом 4-48 страниц, состоящее из двух основных элементов: блока и обложки`,
+    briefEn: `Непериодическое печатное издание объемом 4-48 страниц, состоящее из двух основных элементов: блока и обложки`,
+    textEn: 'Brochure text',
+    textRu: `Непериодическое печатное издание объемом 4-48 страниц, состоящее из двух основных элементов: блока и обложки, и скрепленных между собой при помощи шитья, скрепкой, ниткой или верёвкой и так далее.`,
+    options: [1, 3, 4, 5, 6, 7],
+    availableOrder: true,
+    availableCreate: false
+  },
+  {
+    id: 7,
+    productTypeId: 7,
+    price: 50.00,
+    product: 'calendars',
+    titleEn: 'Calendar',
+    titleRu: 'Календарь',
+    icon: 'mdi-id-card',
+    color: 'orange darken-2',
+    iconSrc: require('@/assets/order/calendar.jpg'),
+    briefRu: `Незаменимый полиграфический сувенир для партнеров и клиентов, а также важный рабочий инструмент для менеджеров, кадровиков и бухгалтеров`,
+    briefEn: `Незаменимый полиграфический сувенир для партнеров и клиентов, а также важный рабочий инструмент для менеджеров, кадровиков и бухгалтеров`,
+    textEn: 'Calendar text',
+    textRu: `Периодическое издание, содержащее последовательный перечень дней, недель, месяцев данного года. 
+            Незаменимый полиграфический сувенир для партнеров и клиентов, а также важный рабочий инструмент для менеджеров, кадровиков и бухгалтеров`,
+    options: [1, 3, 4, 5, 6, 7],
+    availableOrder: true,
+    availableCreate: false
+  },
+  {
+    id: 8,
+    productTypeId: 8,
+    price: 59.00,
+    product: 'vouchers',
+    titleEn: 'Gift voucher',
+    titleRu: 'Подарочный сертификат',
+    icon: 'mdi-id-card',
+    color: 'orange darken-2',
+    iconSrc: require('@/assets/order/gift-voucher.jpg'),
+    briefRu: `Обычно картонная или пластиковая карта, которая несет в себе некоторый эквивалент стоимости в валюте`,
+    briefEn: `Обычно картонная или пластиковая карта, которая несет в себе некоторый эквивалент стоимости в валюте`,
+    textEn: 'Gift voucher text',
+    textRu: `Обычно картонная (сертификат) или пластиковая карта, которая несет в себе некоторый эквивалент стоимости в валюте, принятой в стране эмитента.`,
+    options: [1, 3, 4, 5, 6, 7],
+    availableOrder: true,
+    availableCreate: false
+  },
+  {
+    id: 9,
+    productTypeId: 9,
+    price: 750.00,
+    product: 'flyers',
+    titleEn: 'Flyer',
+    titleRu: 'Листовка',
+    icon: 'mdi-id-card',
+    color: 'orange darken-2',
+    iconSrc: require('@/assets/order/listovka.jpg'),
+    briefRu: `Издание в виде одного листа печатного материала, с одним сгибом или без сгибов`,
+    briefEn: `Издание в виде одного листа печатного материала, с одним сгибом или без сгибов`,
+    textEn: 'Flyer text',
+    textRu: `Издание в виде одного листа печатного материала, с одним сгибом или без сгибов.`,
+    options: [1, 3, 4, 5, 6, 7],
+    availableOrder: true,
+    availableCreate: false
+  },
+  {
+    id: 10,
+    productTypeId: 10,
+    price: 99.99,
+    product: 'tags-and-labels',
+    titleEn: 'Tag and label',
+    titleRu: 'Стикер и бирка',
+    icon: 'mdi-id-card',
+    color: 'orange darken-2',
+    iconSrc: require('@/assets/order/tag-label-sticker.jpg'),
+    briefRu: `Графический или текстовый знак, нанесённый в виде наклейки, бирки или талона на товар, экспонат, любой другой продукт производства`,
+    briefEn: `Графический или текстовый знак, нанесённый в виде наклейки, бирки или талона на товар, экспонат, любой другой продукт производства`,
+    textEn: 'Tag and label text',
+    textRu: `Графический или текстовый знак, нанесённый в виде наклейки, бирки или талона на товар, экспонат, любой другой продукт производства, с указанием торговой марки производителя, названия, даты производства, срока годности и так далее.`,
+    options: [1, 3, 4, 5, 6, 7],
+    availableOrder: true,
+    availableCreate: false
+  },
+]
+
+const options = [{
+    id: 1,
+    name: 'size',
+    titleEn: 'Size',
+    titleRu: 'Размер',
+    type: 'radiobutton',
+    required: 0
+  },
+  {
+    id: 2,
+    name: 'page',
+    titleEn: 'Pages',
+    titleRu: 'Количество страниц',
+    type: 'radiobutton',
+    required: 0
+  },
+  {
+    id: 3,
+    name: 'corners',
+    titleEn: 'Corners',
+    titleRu: 'Углы',
+    type: 'radiobutton',
+    required: 0
+  },
+  {
+    id: 4,
+    name: 'orientation',
+    titleEn: 'Orientation',
+    titleRu: 'Ориентация',
+    type: 'radiobutton',
+    required: 0
+  },
+  {
+    id: 5,
+    name: 'style',
+    titleEn: 'Style',
+    titleRu: 'Стили',
+    type: 'checkboxes',
+    required: 0
+  },
+  {
+    id: 6,
+    name: 'colour',
+    titleEn: 'Colour',
+    titleRu: 'Цвета',
+    type: 'checkboxes',
+    required: 0
+  },
+  {
+    id: 7,
+    name: 'logo',
+    titleEn: 'Logo/photo area',
+    titleRu: 'Логотип или фото',
+    type: 'checkbox',
+    required: 0
+  },
+  {
+    id: 8,
+    name: 'premium',
+    titleEn: 'Premium',
+    titleRu: 'Премиум',
+    type: 'checkbox',
+    required: 0,
+    hideForOrder: true
+  },
+]
+
+
+
+export {
+  products,
+  options,
+}

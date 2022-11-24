@@ -5,6 +5,7 @@ import language from '@/store/modules/language.js';
 import auth from '@/store/modules/auth.js';
 import cart from '@/store/modules/cart.js';
 import base from '@/store/modules/base.js';
+import products from '@/store/modules/products.js';
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     language,
     auth,
     cart,
-    base
+    base,
+    products
   },
 });
