@@ -5,7 +5,7 @@
         <Breadcrumbs :breadcrumbs="currentLanguage === 'en' ? breadcrumbsEn : breadcrumbsRu" />
       </v-col>
     </v-row>
-    <v-row class="d-flex justify-center">
+    <v-row class="d-flex justify-center mx-5 mx-md-0">
       <v-col cols="12" sm="8">
         <v-img
           :lazy-src="currentProduct.iconSrc"
@@ -18,7 +18,7 @@
         <div class="mb-5">
           {{ currentLanguage === 'en' ? currentProduct.textEn : currentProduct.textRu }}
         </div>
-        <div>
+        <!-- <div>
           <v-checkbox
             v-model="hasOptions"
             @click="clickHasOptions"
@@ -116,7 +116,7 @@
 
             </template>
           </v-expansion-panels>      
-        </div>
+        </div> -->
         
         <div class="d-flex flex-column align-center mt-5">
           <ButtonRound
@@ -258,6 +258,7 @@
       orderProduct(product) {
         console.log('form: ', this.form)
         console.log('Order product: ', product)
+        this.$router.push({name: 'orderDetail'})
       }
     }
   }

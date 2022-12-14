@@ -1,13 +1,14 @@
 <template>
   <v-dialog
     v-model="isShown"
-    max-width="600"
+    width="unset"
+    class="pa-md-5"
   >
-    <v-card class="py-5" :loading="pending ? 'black' : false">
+    <v-card class="px-md-5" :loading="pending ? 'black' : false">
       <v-card-title>
-        <v-row>
-          <v-col cols="6"  class="text-h6">Sign in to your account</v-col>
-          <v-col cols="6" class="text-h6 text-right">
+        <v-row class="d-flex flex-column flex-md-row">
+          <v-col cols="12" md="8" class="text-h6 order-md-first">Sign in to your account</v-col>
+          <v-col cols="12" md="4" class="text-h6 text-right order-first">
             <v-btn text plain retain-focus-on-click class="btn-link" @click="openRegisterDialog">
               {{ currentLanguage === 'en' ? 'Or register' : 'Регистрация' }}
             </v-btn>
@@ -49,14 +50,21 @@
         <div class="text-center py-5">
           <buttonFlat @callback="openForgotPassword" :title="currentLanguage === 'en' ? 'Forgot your password?' : 'Забыли пароль?'" />
         </div>
-      </v-card-text>
-
         <v-divider></v-divider>
         <v-spacer></v-spacer>
         
         <div class="d-flex align-center flex-column mt-5">
-          <div class="mb-5 text-caption">By signing in, I agree to the User Agreement and Privacy Policy</div>
-          <div class="d-flex justify-center align-center">
+          <div class="mb-5 text-caption d-flex flex-column flex-md-row align-center justify-center">
+            <span>
+              By signing in, I agree to the
+            </span>
+            <span>
+              <a>User Agreement</a>  
+              and 
+              <a>Privacy Policy</a>
+            </span>
+          </div>
+          <div class="d-flex flex-column flex-md-row justify-center align-center bottom-btns">
             <div>Don't have an account?</div>
             <buttonFlat
               @callback="openRegisterDialog"
@@ -65,6 +73,9 @@
             </buttonFlat>
           </div>
         </div>
+      </v-card-text>
+
+
 
     </v-card>
   </v-dialog>
@@ -119,3 +130,26 @@
     }
   }
 </script>
+
+<style lang="scss">
+@import '@/styles/_variables';
+
+
+
+.bottom-btns {
+  margin: 0 !important;
+}
+
+  @media (max-width: 960px) {
+    .bottom-btns {
+      font-size: $font-size-small;
+      .v-btn {
+        font-size: $font-size-small;
+      }
+    }
+    .v-dialog__content {
+      max-width: 70%;
+      box-sizing: border-box;
+    }
+  }
+</style>

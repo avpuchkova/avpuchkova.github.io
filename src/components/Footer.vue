@@ -9,10 +9,10 @@
               <router-link :to="{name: 'main'}" class="footer-link">Home</router-link>
             </li>
             <li>
-              <router-link :to="{name: 'main'}" class="footer-link">Contact</router-link>
+              <router-link :to="{name: 'Contact'}" class="footer-link">Contact</router-link>
             </li>
             <li>
-              <router-link :to="{name: 'main'}" class="footer-link">Link 3</router-link>
+              <router-link :to="{name: 'About'}" class="footer-link">About Us</router-link>
             </li>
           </ul>
         </v-col>

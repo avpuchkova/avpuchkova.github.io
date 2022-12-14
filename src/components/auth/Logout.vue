@@ -70,10 +70,10 @@
       password: '',
       errors: '',
       drawer: null,
-        items: [
-          { titleEn: 'My Account', titleRu: 'Мой Аккаунт', icon: 'mdi-account-circle-outline', link: 'account' },
-          { titleEn: 'My Orders', titleRu: 'Мои Заказы', icon: 'mdi-clipboard-text-multiple-outline', link: 'orders' },
-        ],
+      items: [
+        { titleEn: 'My Account', titleRu: 'Мой Аккаунт', icon: 'mdi-account-circle-outline', link: 'account' },
+        { titleEn: 'My Orders', titleRu: 'Мои Заказы', icon: 'mdi-clipboard-text-multiple-outline', link: 'orders' },
+      ],
     }),
     computed: {
       ...mapGetters(["isLoggedIn", "userEmail"]),

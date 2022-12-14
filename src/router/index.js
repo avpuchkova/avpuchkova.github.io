@@ -19,11 +19,13 @@ const routes = [{
   },
   {
     path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    name: 'About',
     component: () => import( /* webpackChunkName: "about" */ '../views/About.vue'),
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: () => import( /* webpackChunkName: "about" */ '../views/Contact.vue'),
   },
   {
     path: '/order',
@@ -40,13 +42,13 @@ const routes = [{
       '../views/order/OrderProduct.vue'),
     props: true
   },
-  // {
-  //   path: '/business-cards',
-  //   name: 'templateBusinessCards',
-  //   //component: TemplateBusinessCards,
-  //   component: () => import( /* webpackChunkName: "about" */
-  //     '../views/templates/TemplateBusinessCards.vue'),
-  // },
+  {
+    path: '/order-product/:name/detail',
+    name: 'orderDetail',
+    //component: TemplateBusinessCards,
+    component: () => import( /* webpackChunkName: "about" */
+      '../views/templates/OrderDetail.vue'),
+  },
   {
     path: '/create-product/:name',
     name: 'CreateProduct',

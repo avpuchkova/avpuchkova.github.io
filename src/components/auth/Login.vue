@@ -95,16 +95,20 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '@/styles/_variables';
   .top-menu-btn {
     text-transform: none;
-    color: black;
+    color: black !important;
 
     span {
-      opacity: 1;
+      opacity: 1 !important;
     }
   }
+  .v-btn--plain:not(.v-btn--active):not(.v-btn--loading):not(:focus):not(:hover) .v-btn__content {
+    opacity: 1 !important;
+  }
+
   .top-menu-btn::before {
    // background-color: white !important;
   }

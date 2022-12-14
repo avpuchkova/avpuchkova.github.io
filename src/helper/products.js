@@ -9,16 +9,19 @@ const products = [{
     color: 'green darken-2',
     iconSrc: require('@/assets/order/Business-card.jpg'),
     briefRu: `Малая некнижная форма печати, традиционный носитель контактной информации о человеке или организации`,
-    briefEn: `Small non-book form of printing, a traditional carrier of contact information about a person or organization`,
-    textEn: `Business cards are the ultimate way to give a great first impression. Our 
-            paper business cards are available in both classic landscape orientation and, 
-            for something a bit different, portrait format. Stand out by choosing a 
-            different size, with four options to choose from`,
-    textRu: `Малая некнижная форма печати, традиционный носитель контактной информации о человеке 
-              или организации`,
+    briefEn: `Cards bearing business information about a company or individual`,
+    textEn: `Cards bearing business information about a company or individual. They are 
+            shared during formal introductions as a convenience and a memory aid. 
+            A business card typically includes the giver's name, company or business 
+            affiliation (usually with a logo) and contact information such as street 
+            addresses, telephone number(s), e-mail addresses and website.`,
+    textRu: `Малая некнижная форма печати, традиционный носитель контактной информации о 
+            человеке или организации`,
     options: [1, 3, 4, 5, 6, 7, 8],
     availableOrder: true,
-    availableCreate: true
+    availableCreate: true,
+    orderOrder: 1,
+    createOrder: 1
   },
   {
     id: 2,
@@ -39,7 +42,9 @@ const products = [{
     textRu: `Приглашения text`,
     options: [1, 2, 3, 4, 5, 6, 7, 8],
     availableOrder: false,
-    availableCreate: true
+    availableCreate: true,
+    orderOrder: 2,
+    createOrder: 2
   },
   {
     id: 3,
@@ -50,17 +55,23 @@ const products = [{
     titleRu: 'Буклеты',
     icon: 'mdi-id-card',
     color: 'orange darken-2',
-    iconSrc: require('@/assets/order/leaflet.jpg'),
-    briefRu: `В форме лифлета издаются краткие путеводители, рекламные проспекты, программы публичных мероприятий и т. п.`,
-    briefEn: `В форме лифлета издаются краткие путеводители, рекламные проспекты, программы публичных мероприятий и т. п.`,
-    textEn: 'Presentation Folders text',
+    iconSrc: require('@/assets/order/placeholder.jpg'),
+    briefRu: `В форме  издаются краткие путеводители, рекламные проспекты, программы публичных мероприятий и т. п.`,
+    briefEn: `В форме буклета издаются краткие путеводители, рекламные проспекты, программы публичных мероприятий и т. п.`,
+    textEn: `A sheet, as a rule, with two or three folds, folded in various ways, for 
+            example: in half, accordion, delta-shaped or in any other way that emphasizes 
+            the individuality of the promotional product.
+            In the form of a booklet, short guides, advertising brochures, programs of 
+            public events, etc. are published`,
     textRu: `Лист, как правило, с двумя или тремя фальцами, сложенный всевозможными способами,
-    например: пополам, гармошкой, дельтообразно или любым другим способом, подчёркивающим 
-    индивидуальность рекламного продукта. В форме лифлета издаются краткие путеводители, 
-    рекламные проспекты, программы публичных мероприятий и т. п.`,
+            например: пополам, гармошкой, дельтообразно или любым другим способом, подчёркивающим 
+            индивидуальность рекламного продукта. В форме буклета издаются краткие путеводители, 
+            рекламные проспекты, программы публичных мероприятий и т. п.`,
     options: [1, 2, 3, 4, 5, 6, 7, 8],
     availableOrder: true,
-    availableCreate: true
+    availableCreate: true,
+    orderOrder: 3,
+    createOrder: 3
   },
   {
     id: 4,
@@ -74,11 +85,15 @@ const products = [{
     iconSrc: require('@/assets/order/Badge.jpg'),
     briefRu: `Элемент униформы, амуниции, в виде нагрудного знака, наклейки, карточки`,
     briefEn: `Элемент униформы, амуниции, в виде нагрудного знака, наклейки, карточки`,
-    textEn: 'Presentation Folders text',
-    textRu: `Элемент униформы, амуниции, в виде нагрудного знака, наклейки, карточки, предназначенный для предоставления информации о его носителе`,
+    textEn: `Element of uniform, ammunition, in the form of a badge, sticker, card, 
+            designed to provide information about its wearer`,
+    textRu: `Элемент униформы, амуниции, в виде нагрудного знака, наклейки, карточки, 
+            предназначенный для предоставления информации о его носителе`,
     options: [1, 3, 4, 5, 6, 7],
     availableOrder: true,
-    availableCreate: false
+    availableCreate: false,
+    orderOrder: 4,
+    createOrder: 4
   },
   {
     id: 5,
@@ -91,12 +106,16 @@ const products = [{
     color: 'orange darken-2',
     iconSrc: require('@/assets/order/Doorhanger.jpg'),
     briefRu: `Картонный крючок с рекламной информацией, которая вешается на ручку двери`,
-    briefEn: `Картонный крючок с рекламной информацией, которая вешается на ручку двери`,
-    textEn: 'Doorhandler text',
+    briefEn: `A door hanger is a plastic or cardboard sign, cut to hang from the handle or knob of a door`,
+    textEn: `A door hanger is a plastic or cardboard sign, generally rectangular in shape, 
+          cut to hang from the handle or knob of a door. They are sometimes used to 
+          distribute print advertising to residences`,
     textRu: `Картонный крючок с рекламной информацией, которая вешается на ручку двери`,
     options: [1, 3, 4, 5, 6, 7],
     availableOrder: true,
-    availableCreate: false
+    availableCreate: false,
+    orderOrder: 5,
+    createOrder: 5
   },
   {
     id: 6,
@@ -109,12 +128,19 @@ const products = [{
     color: 'orange darken-2',
     iconSrc: require('@/assets/order/brochure.jpg'),
     briefRu: `Непериодическое печатное издание объемом 4-48 страниц, состоящее из двух основных элементов: блока и обложки`,
-    briefEn: `Непериодическое печатное издание объемом 4-48 страниц, состоящее из двух основных элементов: блока и обложки`,
-    textEn: 'Brochure text',
-    textRu: `Непериодическое печатное издание объемом 4-48 страниц, состоящее из двух основных элементов: блока и обложки, и скрепленных между собой при помощи шитья, скрепкой, ниткой или верёвкой и так далее.`,
+    briefEn: `A non-periodical printed edition of 4-48 pages, consisting of two main 
+            elements: a block and a cover`,
+    textEn: `A non-periodical printed edition of 4-48 pages, consisting of two main 
+          elements: a block and a cover, and fastened together with sewing, a paper clip, 
+          thread or rope, and so on`,
+    textRu: `Непериодическое печатное издание объемом 4-48 страниц, состоящее из двух 
+          основных элементов: блока и обложки, и скрепленных между собой при помощи шитья, 
+          скрепкой, ниткой или верёвкой и так далее.`,
     options: [1, 3, 4, 5, 6, 7],
     availableOrder: true,
-    availableCreate: false
+    availableCreate: false,
+    orderOrder: 6,
+    createOrder: 6
   },
   {
     id: 7,
@@ -127,13 +153,17 @@ const products = [{
     color: 'orange darken-2',
     iconSrc: require('@/assets/order/calendar.jpg'),
     briefRu: `Незаменимый полиграфический сувенир для партнеров и клиентов, а также важный рабочий инструмент для менеджеров, кадровиков и бухгалтеров`,
-    briefEn: `Незаменимый полиграфический сувенир для партнеров и клиентов, а также важный рабочий инструмент для менеджеров, кадровиков и бухгалтеров`,
-    textEn: 'Calendar text',
+    briefEn: `A periodical containing a sequential list of days, weeks, months of a given year`,
+    textEn: `A periodical containing a sequential list of days, weeks, months of a given 
+            year. An irreplaceable printing souvenir for partners and clients, as well as 
+            an important working tool for managers, personnel officers and accountants`,
     textRu: `Периодическое издание, содержащее последовательный перечень дней, недель, месяцев данного года. 
             Незаменимый полиграфический сувенир для партнеров и клиентов, а также важный рабочий инструмент для менеджеров, кадровиков и бухгалтеров`,
     options: [1, 3, 4, 5, 6, 7],
     availableOrder: true,
-    availableCreate: false
+    availableCreate: false,
+    orderOrder: 7,
+    createOrder: 7
   },
   {
     id: 8,
@@ -146,12 +176,14 @@ const products = [{
     color: 'orange darken-2',
     iconSrc: require('@/assets/order/gift-voucher.jpg'),
     briefRu: `Обычно картонная или пластиковая карта, которая несет в себе некоторый эквивалент стоимости в валюте`,
-    briefEn: `Обычно картонная или пластиковая карта, которая несет в себе некоторый эквивалент стоимости в валюте`,
-    textEn: 'Gift voucher text',
+    briefEn: `Usually a cardboard (certificate) or plastic card that carries some equivalent value in the currency`,
+    textEn: `Usually a cardboard (certificate) or plastic card that carries some equivalent value in the currency accepted in the country of issue`,
     textRu: `Обычно картонная (сертификат) или пластиковая карта, которая несет в себе некоторый эквивалент стоимости в валюте, принятой в стране эмитента.`,
     options: [1, 3, 4, 5, 6, 7],
     availableOrder: true,
-    availableCreate: false
+    availableCreate: false,
+    orderOrder: 8,
+    createOrder: 8
   },
   {
     id: 9,
@@ -169,7 +201,9 @@ const products = [{
     textRu: `Издание в виде одного листа печатного материала, с одним сгибом или без сгибов.`,
     options: [1, 3, 4, 5, 6, 7],
     availableOrder: true,
-    availableCreate: false
+    availableCreate: false,
+    orderOrder: 9,
+    createOrder: 9
   },
   {
     id: 10,
@@ -182,12 +216,113 @@ const products = [{
     color: 'orange darken-2',
     iconSrc: require('@/assets/order/tag-label-sticker.jpg'),
     briefRu: `Графический или текстовый знак, нанесённый в виде наклейки, бирки или талона на товар, экспонат, любой другой продукт производства`,
-    briefEn: `Графический или текстовый знак, нанесённый в виде наклейки, бирки или талона на товар, экспонат, любой другой продукт производства`,
-    textEn: 'Tag and label text',
-    textRu: `Графический или текстовый знак, нанесённый в виде наклейки, бирки или талона на товар, экспонат, любой другой продукт производства, с указанием торговой марки производителя, названия, даты производства, срока годности и так далее.`,
+    briefEn: `A graphic or text sign applied in the form of a sticker, tag or coupon on a product, exhibit, any other product of production`,
+    textEn: `A graphic or text sign applied in the form of a sticker, tag or coupon on a product, exhibit, any other product of production, indicating the manufacturer's trademark, name, production date, expiration date, and so on`,
+    textRu: `Графический или текстовый знак, нанесённый в виде наклейки, бирки или талона на товар, экспонат, любой другой продукт производства, с указанием торговой марки производителя, названия, даты производства, срока годности и так далее`,
     options: [1, 3, 4, 5, 6, 7],
     availableOrder: true,
-    availableCreate: false
+    availableCreate: false,
+    orderOrder: 10,
+    createOrder: 10
+  },
+  {
+    id: 11,
+    productTypeId: 11,
+    price: 77.00,
+    product: 'leaflet',
+    titleEn: 'Leaflet',
+    titleRu: 'Лифлет',
+    icon: 'mdi-id-card',
+    color: 'orange darken-2',
+    iconSrc: require('@/assets/order/leaflet.jpg'),
+    briefRu: `Издание в виде одного листа печатного материала, с одним сгибом или без сгибов`,
+    briefEn: `Edition in the form of a single sheet of printed material, with or without a fold`,
+    textEn: `Edition in the form of a single sheet of printed material, with or without a fold`,
+    textRu: `Издание в виде одного листа печатного материала, с одним сгибом или без сгибов`,
+    options: [1, 2, 3, 4, 5, 6, 7, 8],
+    availableOrder: true,
+    availableCreate: false,
+    orderOrder: 11,
+    createOrder: 11
+  },
+  {
+    id: 12,
+    productTypeId: 12,
+    price: 101.00,
+    product: 'advertising',
+    titleEn: 'Outdoor advertising',
+    titleRu: 'Наружная реклама',
+    icon: 'mdi-id-card',
+    color: 'orange darken-2',
+    iconSrc: require('@/assets/order/Shtender.jpg'),
+    briefRu: `Билборды, и т.д.`,
+    briefEn: `Billboards, supersites, firewalls, panel-brackets, pointer, stellas, pavement signs and outdoor banners`,
+    textEn: `Billboard. The most common form is in the form of a large shield 6x3 m. It is placed along roads and highways, usually has a backlight.
+          City format. Luminous box 1.2 x 1.8 m. Also installed along city roads.
+          City board. Same as format but twice the size of 2.7m x 3.7m.
+          Supersite - a three-sided structure on a high support measuring 15 x 5 m, 12 x 3 m, 12 x 4 m. Usually installed near large stores.
+          Firewall - a billboard with advertising on the walls of buildings. Sizes vary, from small to large, depending on the area.
+          Panel-bracket - a medium-sized box illuminated from the inside, attached to the wall.
+          Pointer. Advertising placed on road signs
+          Stella - an advertising structure to indicate the location, for example, a cafe, a canteen, etc. Placed along highways, sometimes near the entrance to the office.
+          Pavement sign is a portable outdoor advertising structure, which is installed on the street in close proximity to the advertiser.
+          Outdoor banners`,
+    textRu: `Издание в виде одного листа печатного материала, с одним сгибом или без сгибов`,
+    options: [1, 2, 3, 4, 5, 6, 7, 8],
+    availableOrder: true,
+    availableCreate: false,
+    orderOrder: 12,
+    createOrder: 12
+  },
+  {
+    id: 13,
+    productTypeId: 13,
+    price: 101.00,
+    product: 'Press wall',
+    titleEn: 'Press wall',
+    titleRu: 'Бренд-волл',
+    icon: 'mdi-id-card',
+    color: 'orange darken-2',
+    iconSrc: require('@/assets/order/placeholder.jpg'),
+    briefRu: `Натянутый на каркас баннер для проведения мероприятий и презентаций`,
+    briefEn: `A banner stretched over a frame, which is designed to decorate the interior during an event`,
+    textEn: `A banner stretched over a frame, which is designed to decorate the interior 
+            during an event (press conference, exhibition, presentation, show, ceremony, 
+            and so on). The information on such a banner has an advertising, presentational
+            or simply informative character`,
+    textRu: `Баннер, натянутый на каркас, который предназначен для оформления интерьера 
+            при проведении какого-либо события (пресс-конференции, выставки, презентации,
+            показа, церемонии и так далее). Информация на таком баннере имеет рекламный, 
+            презентационный или просто информативный характер`,
+    options: [1, 2, 3, 4, 5, 6, 7, 8],
+    availableOrder: true,
+    availableCreate: false,
+    orderOrder: 13,
+    createOrder: 13
+  },
+  {
+    id: 14,
+    productTypeId: 14,
+    price: 10.00,
+    product: 'Press wall',
+    titleEn: 'Souvenir products',
+    titleRu: 'Сувенирная продукция',
+    icon: 'mdi-id-card',
+    color: 'orange darken-2',
+    iconSrc: require('@/assets/order/placeholder.jpg'),
+    briefRu: `Блокноты, кружки, ручки и карандаши с печатью, ежедневники с нанесением, 
+          флажки, флаги, значки, магниты, футболки, пакеты`,
+    briefEn: `Notebooks, mugs, printed pens and pencils, diaries with drawing, flags, 
+          badges, magnets, T-shirts, packages`,
+    textEn: `Notebooks, mugs, printed pens and pencils, diaries with drawing, flags, 
+          badges, magnets, T-shirts, packages`,
+    textRu: `Блокноты, кружки, ручки и карандаши с печатью, ежедневники с нанесением, 
+          флажки, флаги, значки, магниты, футболки, пакеты`,
+    options: [1, 2, 3, 4, 5, 6, 7, 8],
+    availableOrder: true,
+    availableCreate: false,
+    orderOrder: 14,
+    createOrder: 14
   },
 ]
 

@@ -1,7 +1,7 @@
 <template>
   <v-card
-    max-width="80%"
-    class="mx-auto mx-5 py-5"
+
+    class="mx-auto wrapper"
     flat
     >
     <slot>
@@ -26,6 +26,15 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '@/styles/_variables';
+  .wrapper {
+    max-width: 80%;
+  }
 
+  @media (max-width: 960px) {
+    .wrapper {
+      max-width: 100%;
+    }
+  }
 </style>

@@ -105,12 +105,14 @@ const page = [{
 
 const corners = [{
     id: 1,
+    typeId: 1,
     titleEn: 'Rounded',
     titleRu: 'Скругленные',
     value: 'rounded'
   },
   {
     id: 2,
+    typeId: 1,
     titleEn: 'Standart',
     titleRu: 'Стандартные',
     value: 'standart'
@@ -119,12 +121,14 @@ const corners = [{
 
 const orientation = [{
     id: 1,
+    typeId: 1,
     titleEn: 'Horizontal',
     titleRu: 'Горизонтальная',
     value: 'horizontal'
   },
   {
     id: 2,
+    typeId: 1,
     titleEn: 'Vertical',
     titleRu: 'Вертикальная',
     value: 'vertical'

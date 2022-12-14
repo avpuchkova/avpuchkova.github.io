@@ -1,29 +1,33 @@
 <template>
-  <v-app-bar
-    app
-    color="white"
-    outlined
-    elevate-on-scroll
-    class="app-bar"
-  >
-    <v-btn class="d-flex align-center logo" @click="goTo('/')" text plain>
-      <v-img
-        alt="Logo"
-        class="shrink mr-2"
-        contain
-        src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-        transition="scale-transition"
-        width="40"
-      />
-    Pet Project
-    </v-btn>
-    <v-spacer></v-spacer>
-    <div class="d-flex flex-row align-en">
-      <Auth />
-      <LanguageSelect />
-      <Cart />
-    </div>
-  </v-app-bar>
+  <div>
+
+    <v-app-bar
+      
+      :collapse="!collapseOnScroll"
+      :collapse-on-scroll="collapseOnScroll"
+      color="white"
+      outlined
+     
+      class="app-bar"
+    >
+      <v-btn class="d-flex align-center logo" @click="goTo('/')" text plain>
+        <v-img
+          alt="Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"  
+        />
+        Pet Project
+      </v-btn>
+      <v-spacer></v-spacer>
+      <div class="d-flex flex-row justify-space-between">
+        <Auth />
+        <LanguageSelect />
+        <!-- <Cart /> -->
+      </div>
+    </v-app-bar>
+  </div>
 </template>
 
 <script>
@@ -40,7 +44,7 @@
       Auth
     },
     data: () => ({
-
+      collapseOnScroll: true,
     }),
     computed: {
       ...mapGetters(["currentLanguageText", "currentLanguageIcon"]),
@@ -65,14 +69,21 @@
 @import '@/styles/_variables';
   .logo {
     font-size: 1.5rem;
+    .shrink {
+      width: 40px;
+    }
+    
   }
   .app-bar {
     border-bottom: 1px solid $border-light !important;
   }
 
   @media (max-width: 600px) {
-  .logo {
-    font-size: $font-size-base;
-  }
+    .logo {
+      font-size: $font-size-base;
+      .shrink {
+        width: 30px;
+      }
+    }
   }
 </style>

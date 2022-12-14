@@ -1,43 +1,5 @@
 <template>
   <Wrapper>
-    <!-- <v-carousel v-model="carousel" hide-delimiter-background class="carousel">
-      <v-carousel-item
-        v-for="(button, i) in buttons"
-        :key="i"
-      >
-        <v-sheet
-          height="100%"
-          tile
-          class="carousel-item"
-        >
-          <div
-            class="d-flex flex-column align-center justify-center mb-6"
-          >
-            <div class="my-5">
-              <v-icon
-                x-large
-                :color="button.color"
-              >
-                {{`${button.icon}`}}
-              </v-icon>
-            </div>
-            <div class="text-h5 text-sm-h2 my-5">
-              {{ currentLanguage === 'en' ? button.titleEn : button.titleRu }}
-            </div>
-            <div class="mt-5">
-              <v-btn
-                outlined
-                rounded
-                color="primary"
-              >
-                {{currentLanguage === 'en' ? 'Order' : 'Заказать'}}
-              </v-btn>
-            </div>
-          </div>
-        </v-sheet>
-      </v-carousel-item>
-    </v-carousel> -->
-    <v-item-group>
     <v-container>
       <v-row>
         <v-col
@@ -46,52 +8,42 @@
           cols="12"
           md="3"
         >
-          <v-item v-slot="{ active, toggle }">
-            <v-card
-              :class="active ? 'active-button-class' : 'button-class'"
-              outlined
-              height="200"
-              @click="toggle"
-            >
+        <v-hover v-slot="{ hover }">
+          <v-card
+            class="button-class"
+            outlined
+            height="200"
             
-
-              <v-scroll-y-transition>
-                <div
-                  v-if="active"
-                  class="d-flex flex-column align-center align-self-stretch pa-5"
-                >
-                  <div class="active-button-class-text text-center">
-                    {{ currentLanguage === 'en' ? product.briefEn : product.briefRu }}
-                  </div>
-                  <div class=" mt-auto">
-                    <ButtonRound 
-                      :dark="true"
-                      :color="'black'"
-                      :title="currentLanguage === 'en' ? 'Order' : 'Заказать'"
-                      @callback="clickProduct(product)"
-                    />
-                  </div>      
-                </div>
-                <div
-                  v-if="!active"
-                  class="text-center"
-                >
-                  <v-img
-                    :lazy-src="product.iconSrc"
-                    max-height="160"
-                    max-width="160"
-                    :src="product.iconSrc"
-                    >                
-                    </v-img>
-                    <div class="button-class-title">{{ currentLanguage === 'en' ? product.titleEn : product.titleRu }}</div>
-                </div>
-              </v-scroll-y-transition>
-            </v-card>
-          </v-item>
+          > 
+            <v-img
+              v-if="!hover"
+              :lazy-src="product.iconSrc"
+              max-height="133"
+              max-width="160"
+              :src="product.iconSrc"
+            >
+            </v-img>
+            <div
+              v-if="hover"
+              class="d-flex transition-fast-in-fast-out v-card--reveal active-button-class"
+              style="height: 100%; width: 100%;"
+              @click="clickProduct(product)"
+            >
+              <div class="active-button-class-text text-center">
+                {{ currentLanguage === 'en' ? product.briefEn : product.briefRu }}
+              </div>
+            </div>
+            <v-card-text
+              class="text-center d-flex justify-center pa-0 mt-auto"    
+            >
+              <div class="button-class-title">{{ currentLanguage === 'en' ? product.titleEn : product.titleRu }}</div>
+            </v-card-text>
+          </v-card>
+        </v-hover>
+         
         </v-col>
       </v-row>
     </v-container>
-  </v-item-group>
   </Wrapper>
 </template>
 
@@ -158,6 +110,7 @@
 .button-class {
   color: $black;
   background-color: $white;
+  padding: 10px 20px;
   border: 1px solid $border-light;
   display: flex;
   flex-direction: column;
@@ -168,12 +121,16 @@
     &-title {
       color: $body-color;
       font-weight: $font-weight-bolt;
-      margin-top: 10px;
+      
     }
   }
 
   .active-button-class {
     display: flex;
+    align-items: center;
+    padding-top: 10px;
+    cursor: pointer;
+
     &-text {
       font-size: $font-size-base !important;
     }

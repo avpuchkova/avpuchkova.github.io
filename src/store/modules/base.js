@@ -55,7 +55,8 @@ const getters = {
   sortedProducts: state => state.sortedProducts,
   openedProduct: state => state.openedProduct,
 
-  size: state => state.size
+  size: state => state.size,
+  currentTypeId: state => state.currentTypeId
 }
 
 const mutations = {

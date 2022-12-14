@@ -1,7 +1,8 @@
 <template>
   <div>
-
-    <div class="top-tabs">
+    <Banner />
+    <Order />
+    <!-- <div class="top-tabs">
       <v-tabs v-model="tab" centered hide-slider active-class="active-class-tab">
           <v-tab v-for="(item, i) in items" :key="i" class="tabs">{{item[currentLanguage]}}</v-tab>
       </v-tabs>
@@ -16,7 +17,7 @@
           <component :is="item.component"></component>
         </v-card>
       </v-tab-item>
-    </v-tabs-items>
+    </v-tabs-items> -->
   </div>
 </template>
 
@@ -24,12 +25,14 @@
   import { mapState } from 'vuex';
   import Create from '@/views/create/Create.vue';
   import Order from '@/views/order/Order.vue';
+  import Banner from '@/components/Banner.vue'
 
   export default {
     name: 'MainPage',
     components: {
       Create,
-      Order
+      Order,
+      Banner
     },
 
     data: () => ({
@@ -52,18 +55,45 @@
 
 <style lang="scss" scoped>
   @import '@/styles/_variables';
-  .top-tabs {
-    border-bottom: 1px solid $border-light;
-    padding: 15px 0;
-    .tabs {
-      font-size: $font-size-card-large !important;
-      color: $palette-gray;
-      text-transform: none;
-      padding: 0 45px;
-    }
-    & .active-class-tab {
-      color: $black;
-    }
-  }
+  // .top-tabs {
+  //   //border-bottom: 1px solid $border-light;
+  //   padding: 15px 0;
+  //   .tabs {
+  //     font-size: $font-size-card-medium !important;
+  //     color: $palette-gray;
+  //     text-transform: none;
+  //     padding: 0 20px;
+  //     background-color: none !important;
 
+  //     &::before {
+  //       background-color: none !important;
+  //     }
+  //   }
+  //   & .active-class-tab {
+  //     color: $black;
+  //     font-weight: $font-weight-bolt;
+  //     text-decoration: underline;
+
+  //     &::before {
+  //       background-color: none !important;
+  //       opacity: 0 !important;
+  //     }
+  //   }
+  // }
+  // .v-tabs .v-tab:hover::before {
+  //   opacity: 0 !important;
+
+  //   .v-tab--active::before {
+  //     opacity: 0 !important;
+  //   }
+  //   .v-tab--active:focus::before {
+  //     opacity: 0 !important;
+  //   }
+  //   .v-tab:focus::before {
+  //     opacity: 0 !important;
+  //   }
+  //   .v-tab::before{
+  //     background-color: none !important;
+  //   }
+  // }
 </style>
